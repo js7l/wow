@@ -1,6 +1,7 @@
 class Studio < ApplicationRecord
   belongs_to :user
   has_many :sessions, dependent: :destroy
+  has_one_attached :avatar
 
   validates :address, :name, :email, :phone_number, :description, presence: true
   validates :user, uniqueness: true
