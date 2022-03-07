@@ -4,4 +4,5 @@ class Studio < ApplicationRecord
 
   validates :address, :name, :email, :phone_number, :description, presence: true
   validates :user, uniqueness: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 end
