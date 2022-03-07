@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :messages, only: :create
   end
 
-  resources :studios, only: [:new, :show, :create, :edit, :update] do
+  resources :studios, only: [:new, :index, :show, :create, :edit, :update] do
     resources :sessions, only: [:create]
   end
 
