@@ -1,1 +1,11 @@
 // Specific CSS for your home-page
+h3 {
+  margin-top: 50px;
+  font-size: 50px;
+}
+
+.cards-vertical {
+  display: flex;
+  margin: 20px 30px;
+  overflow: scroll;
+}
