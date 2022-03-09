@@ -1,5 +1,5 @@
 class AddLevelToSessions < ActiveRecord::Migration[6.1]
   def change
-    add_column :sessions, :level, :string
+    add_column :events, :level, :string
   end
 end
