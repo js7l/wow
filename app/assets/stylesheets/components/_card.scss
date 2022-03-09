@@ -1,0 +1,120 @@
+.card-event {
+  padding: 18px;
+  overflow: hidden;
+  height: 160px;
+  background: white;
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  // box-shadow: 0 0 1px rgba(0,0,0,0.2);
+  img {
+    border-radius: 10px;
+    margin: 18px 0;
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.4;
+    opacity: .8;
+    margin-bottom: 0;
+    margin-top: 8px;
+  }
+
+  .card-event-infos {
+    padding: 18px;
+    flex-grow: 1;
+  }
+
+  .card-event-price {
+    justify-content: flex-end;
+    align-self: flex-end;
+  }
+}
+
+.card-review {
+  padding: 18px;
+  overflow: hidden;
+  background: white;
+  border-radius: 10px;
+  position: relative;
+  height: 88px;
+  // box-shadow: 0 0 1px rgba(0,0,0,0.2);
+
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.4;
+    opacity: .8;
+    margin: 0;
+  }
+
+  .card-review-stars {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+  }
+}
+
+.card-category {
+  background-size: cover;
+  background-position: center;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  }
+}
+
+.card-package {
+  h2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  h6 {
+    font-size: 24px;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.4;
+    opacity: .8;
+    margin: 0;
+  }
+
+  .card-package-price {
+    p {
+      opacity: 1;
+    }
+  }
+}
