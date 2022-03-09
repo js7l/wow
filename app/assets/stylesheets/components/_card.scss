@@ -22,7 +22,6 @@
   }
 
   p {
-    font-size: 16px;
     line-height: 1.4;
     opacity: .8;
     margin-bottom: 0;
@@ -40,36 +39,6 @@
   }
 }
 
-.card-review {
-  padding: 18px;
-  overflow: hidden;
-  background: white;
-  border-radius: 10px;
-  position: relative;
-  height: 88px;
-  // box-shadow: 0 0 1px rgba(0,0,0,0.2);
-
-  h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 8px;
-  }
-
-  p {
-    font-size: 16px;
-    line-height: 1.4;
-    opacity: .8;
-    margin: 0;
-  }
-
-  .card-review-stars {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-  }
-}
-
 .card-category {
   background-size: cover;
   background-position: center;
@@ -78,7 +47,6 @@
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 24px;
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 10px;
@@ -100,19 +68,17 @@
   border: 1px solid black;
 
   h2 {
-    font-size: 36px;
     font-weight: bold;
     margin: 0;
   }
 
-  h6 {
+  h3 {
     font-size: 24px;
     line-height: 1.4;
     margin: 0;
   }
 
   p {
-    font-size: 16px;
     line-height: 1.4;
     opacity: .8;
     margin: 0;
@@ -123,7 +89,6 @@
 
     p {
       opacity: 1;
-
     }
   }
 
@@ -131,4 +96,55 @@
   //   transform: scale(1.01);
   //   box-shadow: 0 0 5px rgba(0,0,0,0.3);
   // }
+}
+
+.card-review {
+  padding: 18px;
+  overflow: hidden;
+  background: white;
+  border-radius: 10px;
+  position: relative;
+  height: 88px;
+  // box-shadow: 0 0 1px rgba(0,0,0,0.2);
+
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  p {
+    line-height: 1.4;
+    opacity: .8;
+    margin: 0;
+  }
+
+  .card-review-stars {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+  }
+}
+
+.card-review-large {
+  // border: 1px solid black;
+  border-radius: 10px;
+  padding: 24px;
+  width: 300px;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    text-align: center;
+    margin: 0;
+  }
+
+  .fa {
+    color: rgb(218, 218, 9);
+    font-size: 24px;
+  }
 }
