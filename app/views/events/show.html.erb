@@ -1,1 +1,15 @@
-<p> hello from show page</p>
+<p> hello from Class show page</p>
+<%= cl_image_tag @event.photo.key %>
+<p><%= @event.name %></p>
+<p>Studio       : <%= @event.studio.name %></p>
+<p>Address      : <%= @event.studio.address %></p>
+<p>Instructor   :<%= @event.instructor %></p>
+<p>Date, Time   :<%= @event.date %>, <%= @event.time %></p>
+<p>Attendees    :<%= @event.limit_attendees %></p>
+<p>Price        : IDR <%= @event.price %></p>
+<p>Level        :<%= @event.level %> </p>
+
+<%= cl_image_tag @event.studio.avatar.key %>
+<p>More about <%= @event.studio.name %></p></p>
+<p>Email : <%= @event.studio.email %> </p>
+<p> Phone : <%= @event.studio.phone_number %> </p>
