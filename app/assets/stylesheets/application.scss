@@ -12,6 +12,23 @@
 @import "components/index";
 @import "pages/index";
 
+h1 {
+  font-size: 76px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+p {
+  font-size: 16px;
+}
+
 a {
   text-decoration: none;
 }
