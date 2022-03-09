@@ -1,28 +1,38 @@
 .card-wrapper {
   overflow: hidden;
-  background: white;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
   height: 70vh;
 }
 .card-show {
   padding-right: 10px;
-  line-height: 45px;
+  line-height: 30px;
   position: relative;
   margin-left: 12px;
-
+  letter-spacing: 1px;
 }
 
 .card-show-details {
   height: 70vh;
+  margin-left: 80px;
   img {
     height: 100px;
+    width: 200px;
+    object-fit: contain;
   }
 }
 .card-image {
   object-fit: cover;
-  background-position: center;
   height: 100%;
   background-repeat: no-repeat;
+}
+.card-wrapper-review {
+
+}
+
+.modal-body {
+  line-height: 30px;
+}
+.icon {
+  width: 30px;
 }
