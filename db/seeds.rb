@@ -12,7 +12,7 @@ User.destroy_all
 puts "Destroying all studios"
 Studio.destroy_all
 puts "Destroying all sessions"
-Session.destroy_all
+Event.destroy_all
 
 puts "Creating users"
 file = File.open(Rails.root.join("app/assets/images/ratna.png"))
