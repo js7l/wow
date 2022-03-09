@@ -1,8 +1,11 @@
+require 'date'
+
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    @events = Event.all
+    @events = Event.order(:date)
+    @events_group = @events.group_by { |event| event.date && event.time.strftime('%I:%M %p') }
   end
 
   def show
