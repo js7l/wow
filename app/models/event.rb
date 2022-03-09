@@ -1,4 +1,4 @@
-class Session < ApplicationRecord
+class Event < ApplicationRecord
   CATEGORIES = ["Yoga", "Surfing", "HIIT", "Boxing", "Weight Lifting", "Crossfit", "Swimming", "Others"]
   LEVELS = ["Beginner", "Intermediate", "Advanced", "All Levels"]
   belongs_to :studio
