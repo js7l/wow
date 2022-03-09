@@ -1,0 +1,14 @@
+.card-wrapper {
+  overflow: hidden;
+  background: white;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  align-items: center;
+  height: 70vh;
+}
+.card-show {
+  padding-right: 10px;
+  line-height: 45px;
+  position: relative;
+  margin-left: 12px;
+}
