@@ -92,11 +92,17 @@
 }
 
 .card-package {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid black;
+
   h2 {
     font-size: 36px;
     font-weight: bold;
     margin: 0;
-    margin-bottom: 8px;
   }
 
   h6 {
@@ -113,8 +119,16 @@
   }
 
   .card-package-price {
+    text-align: center;
+
     p {
       opacity: 1;
+
     }
   }
+
+  // &:hover {
+  //   transform: scale(1.01);
+  //   box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  // }
 }
