@@ -113,6 +113,7 @@
   height: 88px;
   // box-shadow: 0 0 1px rgba(0,0,0,0.2);
 
+
   h2 {
     font-size: 18px;
     font-weight: bold;
@@ -130,6 +131,29 @@
     position: absolute;
     top: 18px;
     right: 18px;
+  }
+}
+
+.card-category {
+  background-size: cover;
+  background-position: center;
+  width: 300px;
+  height: 300px;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
   }
 
   .fa {
