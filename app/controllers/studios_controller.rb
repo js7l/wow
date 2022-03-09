@@ -1,5 +1,5 @@
 class StudiosController < ApplicationController
-  def index
-
+  def show
+    @studio = Studio.find(params[:id])
   end
 end
