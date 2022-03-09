@@ -5,7 +5,18 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.order(:date)
-    @events_group = @events.group_by { |event| event.date && event.time.strftime('%I:%M %p') }
+    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%I:%M %p')] }
+
+    @studios = Studio.all
+    # the `geocoded` scope filters only studios with coordinates (latitude & longitude)
+    @markers = @studios.geocoded.map do |studio|
+      {
+        lat: studio.latitude,
+        lng: studio.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { studio: studio }),
+        image_url: helpers.asset_url("wow-logo.png")
+      }
+    end
   end
 
   def show
