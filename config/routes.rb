@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :sessions, except: [:create] do
+  resources :events, except: [:create] do
     resources :bookings, only: [:create]
   end
 
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :studios, only: [:new, :show, :create, :edit, :update] do
-    resources :sessions, only: [:create]
+    resources :events, only: [:create]
   end
 
   get '/dashboard', to: 'pages#dashboard'
