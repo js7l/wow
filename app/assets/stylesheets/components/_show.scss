@@ -2,7 +2,7 @@
   overflow: hidden;
   background: white;
   display: grid;
-  grid-template-columns: 2fr 2fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   height: 70vh;
 }
@@ -11,4 +11,18 @@
   line-height: 45px;
   position: relative;
   margin-left: 12px;
+
+}
+
+.card-show-details {
+  height: 70vh;
+  img {
+    height: 100px;
+  }
+}
+.card-image {
+  object-fit: cover;
+  background-position: center;
+  height: 100%;
+  background-repeat: no-repeat;
 }

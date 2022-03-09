@@ -1,8 +1,8 @@
 <div class="container">
   <div class="card-wrapper">
-    <%= cl_image_tag @event.photo.key, height: 400, crop: :fill %>
+  <div class="card-image" style="background-image: url( <%= cl_image_path @event.photo.key, height: 400, crop: :fill%>)"></div>
     <div class="card-show ">
-      <p><%= @event.name %></p>
+      <h2><%= @event.name %></h2>
       <p>Studio       : <%= @event.studio.name %></p>
       <p>Address      : <%= @event.studio.address %></p>
       <p>Instructor   :<%= @event.instructor %></p>
@@ -10,15 +10,24 @@
       <p>Attendees    :<%= @event.limit_attendees %></p>
       <p>Price        : IDR <%= @event.price %></p>
       <p>Level        :<%= @event.level %> </p>
-      <button> Book Now</button>
+      <%= link_to "Book Now","#", class: "btn-primary" %>
     </div>
   </div>
   <div class="card-wrapper">
+    <div class="card-review">
+      <h2>Product name</h2>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis optio delectus molestiae rem in? Minus consectetur ab nam sapiente hic, necessitatibus cum labore ipsum similique quia nemo blanditiis officia sit!</p>
+      <div class="card-review-stars">
+        <p>⭐⭐⭐⭐⭐</p>
+      </div>
+    </div>
     <div class="card-show-details">
-      <%= cl_image_tag @event.studio.avatar.key %>
+      <%= cl_image_tag @event.studio.avatar.key, class: "d-flex justify-content-between align-items-start"%>
       <p>More about <%= @event.studio.name %></p></p>
       <p>Email : <%= @event.studio.email %> </p>
       <p> Phone : <%= @event.studio.phone_number %> </p>
+      <%= link_to "Contact Us", "#", class:"btn-primary"%>
+      <%= link_to "More Info", "#", class:"btn-secondary"  %>
     </div>
   </div>
 </div>
