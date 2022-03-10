@@ -3,10 +3,7 @@
     <div class="card-image" style="background-image: url('<%= cl_image_path @studio.events.first.photo.key, crop: :fill %>')">
     </div>
     <div class="card-show">
-      <div>
-        <h2><%= @studio.name %></h2>
-        <%= cl_image_tag(@studio.avatar.key, class: "card-avatar-large") %>
-      </div>
+      <h2><%= @studio.name %></h2>
       <div>
         <span class="fa fa-star icon-star"></span>
         <span class="fa fa-star icon-star"></span>
@@ -48,5 +45,6 @@
         <%= render 'shared/map' %>
       </div>
     </div>
+    <%= render 'shared/chatroom' %>
   </div>
 </div>
