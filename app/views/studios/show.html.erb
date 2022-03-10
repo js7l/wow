@@ -1,27 +1,50 @@
-<div class="container">
-  <div class="card-item">
-    <div class="card-image" style="background-image: url( <%= cl_image_path @studio.avatar.key, height: 400, crop: :fill%>)"></div>
-    <div class="card-item-middle">
-      <div class="card-name-avatar">
-        <h3><%= @studio.name %></h3>
-        <div>
-          <span class="fa fa-star icon-star"></span>
-          <span class="fa fa-star icon-star"></span>
-          <span class="fa fa-star icon-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-        </div>
+<div class="container" id="studio-show">
+  <div class="card-wrapper-studio mt-5">
+    <div class="card-image" style="background-image: url('<%= cl_image_path @studio.events.first.photo.key, crop: :fill %>')">
+    </div>
+    <div class="card-show">
+      <h2><%= @studio.name %></h2>
+      <div>
+        <span class="fa fa-star icon-star"></span>
+        <span class="fa fa-star icon-star"></span>
+        <span class="fa fa-star icon-star"></span>
+        <span class="fa fa-star icon-empty"></span>
+        <span class="fa fa-star icon-empty"></span>
       </div>
-      <br>
-      <div class="item-details d-flex">
-        <div data-controller="favourite">
-          <p><%= @studio.description %> </p>
-          <p><%= @studio.email %></p>
-          <p><%= @studio.phone_number %></p>
-          <br>
-          <button class="btn btn-primary">Contact Us</button>
-        </div>
+      <p><%= @studio.description %></p>
+      <p>Email: <%= @studio.email %></p>
+      <p>Phone number: <%= @studio.phone_number %></p>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Contact Us
+      </button>
+    </div>
+  </div>
+  <div class="card-wrapper-studio">
+    <div class="card-schedule">
+      <div class="border-bottom mb-4">
+        <h4>Schedule</h4>
+        <br>
       </div>
-    <div class="card">
+      <%= render 'shared/card_event' %>
+      <%= render 'shared/card_event' %>
+      <%= render 'shared/card_event' %>
+      <%= render 'shared/card_event' %>
+    </div>
+    <div class="card-membership">
+      <div class="border-bottom mb-4">
+        <h4>Membership Plan</h4>
+        <br>
+      </div>
+      <div class="card-membership-package">
+        <%= render 'shared/card_package' %>
+        <%= render 'shared/card_package' %>
+        <%= render 'shared/card_package' %>
+      </div>
+      <div class="card-map mt-4">
+        <h5>Where to find us</h5>
+        <%= render 'shared/map' %>
+      </div>
+    </div>
+    <%= render 'shared/chatroom' %>
   </div>
 </div>
