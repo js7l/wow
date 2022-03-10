@@ -34,7 +34,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    # @studio = Studio.new
+    # @studio = Studio.find(params[:event_id])
   end
 
   def new
@@ -64,6 +64,13 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
   end
+
+  def favourite
+    @event = Event.find(params[:event_id])
+    current_user.favorite(@event)
+    redirect_to dashboard_path
+  end
+
 
   private
 

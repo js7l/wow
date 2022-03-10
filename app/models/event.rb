@@ -4,6 +4,7 @@ class Event < ApplicationRecord
   belongs_to :studio
   has_many :bookings, dependent: :destroy
   has_one_attached :photo
+  acts_as_favoritable
 
   validates :name, :category, :date, :time, :duration, :limit_attendees, :price, :instructor, :level, presence: true
   validates :category, inclusion: { in: CATEGORIES }

@@ -1,4 +1,4 @@
-  <div class="container">
+<div class="container">
     <h2>Dashboard</h2>
     <div class="d-flex mt-3">
       <%= cl_image_tag current_user.avatar.key, class: "avatar-large" %>
@@ -7,4 +7,30 @@
         <p class="m-0"><%= current_user.email %></p>
       </div>
     </div>
+  <div class="my-4">
+    <h3>My Bookings</h3>
+    <% @bookings_of_user.each do |booking_of_user| %>
+      <div class="card-product mt-3 d-flex justify-content-between">
+        <%= cl_image_tag booking_of_user.event.photo.key %>
+        <div class="card-product-infos">
+          <h2><%= booking_of_user.event.name %></h2>
+          <p>Date, Time: <%= booking_of_user.event.date.strftime("%e %b %Y") %> - <%= booking_of_user.event.time.strftime('%I:%M %p') %></p>
+          <p>Status: <%= booking_of_user.status %></p>
+          <h3>Total Price: <strong>IDR <%= number_with_delimiter(booking_of_user.total_price, :delimiter => '.') %></strong></h3>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  <div class="my-4">
+  <h3>My Favorite Classes</h3>
+   <% @favorited_events.each do |favorited_event| %>
+    <div class="card-product mt-3 d-flex justify-content-between">
+      <%= cl_image_tag favorited_event.photo.key %>
+      <div class="card-product-infos">
+        <h2><%= favorited_event.name %></h2>
+        <p>Date, Time: <%= favorited_event.date.strftime("%e %b %Y") %> - <%= favorited_event.time.strftime('%I:%M %p') %></p>
+      </div>
+    </div>
+    <% end %>
   </div>
+</div>

@@ -14,12 +14,12 @@ class BookingsController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
   def update
-
+    @booking = Booking.find(params[:id])
+    @booking.status = params[:booking][:status]
+    if @booking.save
+      redirect_to dashboard_path
+    end
   end
 
 
