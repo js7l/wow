@@ -52,6 +52,13 @@ class EventsController < ApplicationController
     @event.destroy
   end
 
+  def favourite
+    @event = Event.find(params[:event_id])
+    current_user.favorite(@event)
+    redirect_to dashboard_path
+  end
+
+
   private
 
   def event_params
