@@ -8,7 +8,7 @@
       <p>Instructor   :<%= @event.instructor %></p>
       <p>Date, Time   :<%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
       <p>Attendees    :<%= @event.limit_attendees %></p>
-      <p>Price        : <%= number_with_delimiter(event.price, :delimiter => '.') %>
+      <p>Price        : IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
       <p>Level        :<%= @event.level %> </p>
      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
        Book Now
@@ -32,7 +32,7 @@
               <p>Instructor   :<%= @event.instructor %></p>
               <p>Date, Time   :<%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
               <p>Attendees    :<%= @event.limit_attendees %></p>
-              <p>Price        : IDR <%= @event.price %></p>
+              <p>Price        : IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
               <p>Level        :<%= @event.level %> </p>
             </div>
           </div>
