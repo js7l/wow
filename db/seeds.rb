@@ -13,6 +13,8 @@ puts "Destroying all studios"
 Studio.destroy_all
 puts "Destroying all sessions"
 Event.destroy_all
+puts "Destroying chatroom"
+Chatroom.destroy_all
 
 puts "Creating users"
 file = File.open(Rails.root.join("app/assets/images/ratna.png"))
@@ -175,3 +177,10 @@ file = File.open(Rails.root.join("app/assets/images/surfing4.webp"))
 surfa.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
 surfa.save!
 puts "#{Event.count} sessions created"
+
+puts "Creating chatroom"
+chatroom1 = Chatroom.new(user: ratna, studio: canggu)
+chatroom1.save!
+
+#message
+message1 = Message.create!(content: "Hello", user: ratna, chatroom: chatroom1)

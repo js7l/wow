@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 
   resources :studios, only: [:new, :show, :create, :edit, :update] do
     resources :events, only: [:create]
-
   end
 
   get '/dashboard', to: 'pages#dashboard'
