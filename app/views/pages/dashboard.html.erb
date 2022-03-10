@@ -18,6 +18,28 @@
           <p>Status: <%= booking_of_user.status %></p>
           <h3>Total Price: <strong>IDR <%= number_with_delimiter(booking_of_user.total_price, :delimiter => '.') %></strong></h3>
         </div>
+        <%# ---------- %>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= booking_of_user.id%>" data-bs-whatever="@getbootstrap">Leave a review</button>
+      <div class="modal fade" id="exampleModal-<%= booking_of_user.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Type your review for <%= booking_of_user.event.name %> </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <%= simple_form_for [booking_of_user, @review], html: { id: "review-booking-#{booking_of_user.id}" } do |f| %>
+                <%= f.input :rating %>
+                <%= f.input :content %>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" form="review-booking-<%= booking_of_user.id %>">Send Review</button>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
       <% end %>
     </div>
@@ -32,5 +54,4 @@
       </div>
     </div>
     <% end %>
-  </div>
 </div>
