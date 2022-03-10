@@ -14,21 +14,29 @@ class EventsController < ApplicationController
       @events = Event.order(:date)
     end
 
-    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%I:%M %p')] }
+    if params[:date].present?
+      @events = @events.where(date: params[:date])
+    end
+
+    if params[:time].present?
+      @events = @events.where(time: params[:time])
+    end
+
+    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
     @studios = Studio.where(id: @events.pluck(:studio_id))
     # the `geocoded` scope filters only studios with coordinates (latitude & longitude)
     @markers = @studios.geocoded.map do |studio|
       {
         lat: studio.latitude,
         lng: studio.longitude,
-        info_window: render_to_string(partial: "info_window", locals: { studio: studio }),
+        info_window: render_to_string(partial: "info_window", locals: { studio: studio }, formats: [:html]),
         image_url: helpers.asset_url("wow-logo.png")
       }
     end
 
     respond_to do |format|
       format.html # Follow regular flow of Rails
-      format.text { render partial: 'shared/card_event', locals: { event: @event }, formats: [:html] }
+      format.text { render partial: 'class_lists', locals: { events: @events, events_group: @events_group }, formats: [:html] }
     end
   end
 
