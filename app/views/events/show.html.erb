@@ -54,26 +54,15 @@
     <div class="">
       <div class="card-wrapper-review">
           <p>Reviews :</p>
+          <% @event.reviews.each do |review| %>
         <div class="card-review p-3">
-          <h2>Product name</h2>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis optio delectus molestiae rem in? Minus consectetur ab nam sapiente hic, necessitatibus cum labore ipsum similique quia nemo blanditiis officia sit!</p>
+          <h2> <%= review.booking.event.name %> </h2>
+          <p>  </p>
+          <p><%= review.content %></p>
           <div class="card-review-stars">
-            <p>⭐⭐⭐⭐⭐</p>
+            <p><%= review.rating %></p>
           </div>
-        </div>
-        <div class="card-review p-3">
-          <h2>Product name</h2>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis optio delectus molestiae rem in? Minus consectetur ab nam sapiente hic, necessitatibus cum labore ipsum similique quia nemo blanditiis officia sit!</p>
-          <div class="card-review-stars">
-            <p>⭐⭐⭐⭐⭐</p>
-          </div>
-        </div>
-        <div class="card-review p-3">
-          <h2>Product name</h2>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis optio delectus molestiae rem in? Minus consectetur ab nam sapiente hic, necessitatibus cum labore ipsum similique quia nemo blanditiis officia sit!</p>
-          <div class="card-review-stars">
-            <p>⭐⭐⭐⭐⭐</p>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -89,3 +78,6 @@
     </div>
   </div>
 </div>
+
+
+<%# ----------------------- %>

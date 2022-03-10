@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @review = Review.new
     @bookings_of_user = Booking.where(user: current_user)
     @bookings_from_user = Booking.joins(:event).where(event: { user: current_user })
     @favorited_events = current_user.all_favorited

@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   LEVELS = ["Beginner", "Intermediate", "Advanced", "All Levels"]
   belongs_to :studio
   has_many :bookings, dependent: :destroy
+  has_many :reviews, through: :bookings
   has_one_attached :photo
   acts_as_favoritable
 
