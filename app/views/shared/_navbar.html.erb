@@ -13,9 +13,7 @@
             placeholder: "Find a class"
           %>
         </div>
-        <div class="position-absolute end-0 w-auto align-center">
-          <button class="rounded"><i class="fas fa-search fa-2xs"></i></button>
-        </div>
+        <button class="btn-search position-absolute end-0 right-0"><i class="fas fa-search fa-2xs"></i></button>
       </div>
     <% end %>
 
@@ -32,8 +30,8 @@
           <li class="nav-item">
             <%= link_to "Create a Studio", "#", class: "nav-link" %>
           </li>
-          <li class="nav-item dropdown">
-            <%= cl_image_tag current_user.avatar.key, class: "avatar-small dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <li class="nav-item dropdown ms-2">
+            <%= cl_image_tag current_user.avatar.key, height: 40, width: 40, crop: :fill, class: "avatar-small dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Dashboard", "#", class: "dropdown-item" %>
               <%= link_to "Messages", "#", class: "dropdown-item" %>

@@ -4,10 +4,18 @@ class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    @events = Event.order(:date)
-    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%I:%M %p')] }
+    @categories = Event::CATEGORIES
 
-    @studios = Studio.all
+    if params[:query].present?
+      @events = Event.search_by(params[:query])
+    elsif params[:category].present?
+      @events = Event.where(category: params[:category])
+    else
+      @events = Event.order(:date)
+    end
+
+    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%I:%M %p')] }
+    @studios = Studio.where(id: @events.pluck(:studio_id))
     # the `geocoded` scope filters only studios with coordinates (latitude & longitude)
     @markers = @studios.geocoded.map do |studio|
       {
@@ -16,6 +24,11 @@ class EventsController < ApplicationController
         info_window: render_to_string(partial: "info_window", locals: { studio: studio }),
         image_url: helpers.asset_url("wow-logo.png")
       }
+    end
+
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'shared/card_event', locals: { event: @event }, formats: [:html] }
     end
   end
 
