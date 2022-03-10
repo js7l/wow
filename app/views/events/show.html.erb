@@ -13,6 +13,9 @@
      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
        Book Now
      </button>
+     <%= link_to event_favourite_path(@event), method: :post do %>
+      <i class="fas fa-heart"></i>
+     <% end %>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :events, except: [:create] do
     resources :bookings, only: [:create]
+    post "/favourite", to: "events#favourite"
   end
 
   resources :bookings, only: [:show, :edit, :update] do
@@ -16,7 +17,6 @@ Rails.application.routes.draw do
 
   resources :studios, only: [:new, :show, :create, :edit, :update] do
     resources :events, only: [:create]
-
   end
 
   get '/dashboard', to: 'pages#dashboard'

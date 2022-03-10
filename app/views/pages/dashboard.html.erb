@@ -21,4 +21,16 @@
       </div>
       <% end %>
     </div>
+  <div class="my-4">
+  <h3>My Favorite Classes</h3>
+   <% @favorited_events.each do |favorited_event| %>
+    <div class="card-product mt-3 d-flex justify-content-between">
+      <%= cl_image_tag favorited_event.photo.key %>
+      <div class="card-product-infos">
+        <h2><%= favorited_event.name %></h2>
+        <p>Date, Time: <%= favorited_event.date.strftime("%e %b %Y") %> - <%= favorited_event.time.strftime('%I:%M %p') %></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
 </div>
