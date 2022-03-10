@@ -21,7 +21,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    # @studio = Studio.new
+    # @studio = Studio.find(params[:event_id])
   end
 
   def new
