@@ -4,7 +4,7 @@
       <%= image_tag "wow-logo.png" %>
     <% end %>
 
-    <%= form_tag events_path, method: :get do %>
+    <%= form_tag events_path, method: :get, class: action_name == "home" ? "d-none" : "" do %>
       <div class="row g-0 position-relative">
         <div class="col-md-12">
           <%= text_field_tag :query,
