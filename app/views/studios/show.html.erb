@@ -1,10 +1,16 @@
 <div class="container">
   <div class="card-item">
-    <div class="card-image" style="background-image: url( <%= cl_image_path @studio.photo.key, height: 400, crop: :fill%>)"></div>
+    <div class="card-image" style="background-image: url( <%= cl_image_path @studio.avatar.key, height: 400, crop: :fill%>)"></div>
     <div class="card-item-middle">
       <div class="card-name-avatar">
         <h3><%= @studio.name %></h3>
-        <%= @studio.rating %>
+        <div>
+          <span class="fa fa-star icon-star"></span>
+          <span class="fa fa-star icon-star"></span>
+          <span class="fa fa-star icon-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+        </div>
       </div>
       <br>
       <div class="item-details d-flex">
