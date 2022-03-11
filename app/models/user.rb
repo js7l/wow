@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :studios, dependent: :destroy
   has_many :chatrooms, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_one_attached :avatar
   acts_as_favoritor
 
