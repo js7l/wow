@@ -16,13 +16,15 @@
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Book Now
       </button>
-        <% if current_user.favorited?(@event) %>
-          <%= link_to event_unfavourite_path(@event), method: :delete, remote: true do %>
-            <i style="color: red;" class="fas fa-heart fa-2x"></i>
-          <% end %>
-        <% else %>
-          <%= link_to event_favourite_path(@event), method: :post, remote: true do %>
-            <i style="color: red;" class="far fa-heart fa-2x"></i>
+        <% if user_signed_in? %>
+          <% if current_user.favorited?(@event) %>
+            <%= link_to event_unfavourite_path(@event), method: :delete, remote: true do %>
+              <i style="color: red;" class="fas fa-heart fa-2x"></i>
+            <% end %>
+          <% else %>
+            <%= link_to event_favourite_path(@event), method: :post, remote: true do %>
+              <i style="color: red;" class="far fa-heart fa-2x"></i>
+            <% end %>
           <% end %>
         <% end %>
       <!-- Modal -->
@@ -64,13 +66,13 @@
       Be the first to leave a review for <%= @event.name %>
       <% else %>
       <% @event.reviews.each do |review| %>
-        <div class="card-review p-3">
+        <div class="card-review mb-3">
           <h2> <%= review.booking.event.name %> </h2>
           <p><%= review.content %></p>
           <div class="card-review-stars">
             <p>
               <% review.rating.to_i.times do %>
-                <i class="fas fa-star"></i>
+                <i class="fas fa-star text-warning"></i>
               <% end %>
             </p>
           </div>
