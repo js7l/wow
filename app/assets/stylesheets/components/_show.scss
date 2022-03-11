@@ -10,6 +10,11 @@
   position: relative;
   margin-left: 12px;
   letter-spacing: 1px;
+  img {
+    height: 100px;
+    width: 200px;
+    object-fit: contain;
+  }
 }
 
 .card-show-details {
@@ -19,6 +24,9 @@
     height: 100px;
     width: 200px;
     object-fit: contain;
+  }
+  .icon{
+    height: 100px;
   }
 }
 .card-image {

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :events, except: [:create] do
     resources :bookings, only: [:create]
     post "/favourite", to: "events#favourite"
+    delete "/unfavourite", to: "events#unfavourite"
   end
 
   resources :bookings, only: [:show, :edit, :update] do
