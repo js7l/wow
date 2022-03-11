@@ -7,19 +7,19 @@ class EventsController < ApplicationController
     @categories = Event::CATEGORIES
 
     if params[:query].present?
-      @events = Event.search_by(params[:query])
+      @events = Event.search_by(params[:query]).order(:date, :time)
     elsif params[:category].present?
-      @events = Event.where(category: params[:category])
+      @events = Event.where(category: params[:category]).order(:date, :time)
     else
-      @events = Event.order(:date)
+      @events = Event.order(:date, :time)
     end
 
     if params[:date].present?
-      @events = @events.where(date: params[:date])
+      @events = @events.where(date: params[:date]).order(:date, :time)
     end
 
     if params[:time].present?
-      @events = @events.where(time: params[:time])
+      @events = @events.where(time: params[:time]).order(:date, :time)
     end
 
     @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
