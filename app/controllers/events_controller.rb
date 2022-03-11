@@ -80,7 +80,15 @@ class EventsController < ApplicationController
   def favourite
     @event = Event.find(params[:event_id])
     current_user.favorite(@event)
-    redirect_to dashboard_path
+    flash[:notice] = "Added to favourite"
+    redirect_to event_path(@event)
+  end
+
+  def unfavourite
+    @event = Event.find(params[:event_id])
+    current_user.unfavorite(@event)
+    flash[:notice] = "Removed from favorite"
+    redirect_to event_path(@event)
   end
 
 

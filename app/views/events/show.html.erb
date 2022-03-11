@@ -1,6 +1,8 @@
 <div class="container">
   <div class="card-wrapper mt-5">
-  <div class="card-image" style="background-image: url( <%= cl_image_path @event.photo.key, height: 400, crop: :fill%>)"></div>
+    <div class="card-show">
+      <div class="card-image" style="background-image: url( <%= cl_image_path @event.photo.key, height: 400, crop: :fill%>)"></div>
+    </div>
     <div class="card-show ">
       <h2><%= @event.name %></h2>
       <p>Studio       : <%= @event.studio.name %></p>
@@ -10,64 +12,74 @@
       <p>Attendees    :<%= @event.limit_attendees %></p>
       <p>Price        : IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
       <p>Level        :<%= @event.level %> </p>
-     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-       Book Now
-     </button>
-     <%= link_to event_favourite_path(@event), method: :post do %>
-      <i class="fas fa-heart"></i>
-     <% end %>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header bg-black">
-            <%= link_to root_path, class: "navbar-brand" do %>
-              <%= image_tag "wow-logo.png", class:"icon" %>
-            <% end %>
-            <h5 class="modal-title text-white" id="exampleModalLabel"><%= @event.name %></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-          <%= cl_image_tag @event.photo.key, width: 300, height: 300, crop: :fill  %>
-            <div class="modal-card lh-sm">
-              <p>Studio       : <%= @event.studio.name %></p>
-              <p>Address      : <%= @event.studio.address %></p>
-              <p>Instructor   :<%= @event.instructor %></p>
-              <p>Date, Time   :<%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
-              <p>Attendees    :<%= @event.limit_attendees %></p>
-              <p>Price        : IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
-              <p>Level        :<%= @event.level %> </p>
+
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Book Now
+      </button>
+        <% if current_user.favorited?(@event) %>
+          <%= link_to event_unfavourite_path(@event), method: :delete, remote: true do %>
+            <i style="color: red;" class="fas fa-heart fa-2x"></i>
+          <% end %>
+        <% else %>
+          <%= link_to event_favourite_path(@event), method: :post, remote: true do %>
+            <i style="color: red;" class="far fa-heart fa-2x"></i>
+          <% end %>
+        <% end %>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-black">
+              <%= link_to root_path, class: "navbar-brand" do %>
+                <%= image_tag "wow-logo.png", class:"icon" %>
+              <% end %>
+              <h5 class="modal-title text-white" id="exampleModalLabel"><%= @event.name %></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <%= cl_image_tag @event.photo.key, width: 300, height: 300, crop: :fill  %>
+              <div class="modal-card lh-sm">
+                <p>Studio       : <%= @event.studio.name %></p>
+                <p>Address      : <%= @event.studio.address %></p>
+                <p>Instructor   :<%= @event.instructor %></p>
+                <p>Date, Time   :<%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
+                <p>Attendees    :<%= @event.limit_attendees %></p>
+                <p>Price        : IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
+                <p>Level        :<%= @event.level %> </p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <%= link_to "Book Now",event_bookings_path(@event), method: :post, class: "btn btn-primary" %>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-            <%= link_to "Book Now",event_bookings_path(@event), method: :post, class: "btn btn-primary" %>
-          </div>
         </div>
       </div>
-    </div>
-
     </div>
   </div>
-  <div class="card-wrapper">
-    <div class="">
-      <div class="card-wrapper-review">
-          <p>Reviews :</p>
-          <% @event.reviews.each do |review| %>
+  <div class="card-wrapper ">
+    <div class="card-show">
+      <p>Reviews :</p>
+      <% if @event.reviews.blank? %>
+      Be the first to leave a review for <%= @event.name %>
+      <% else %>
+      <% @event.reviews.each do |review| %>
         <div class="card-review p-3">
           <h2> <%= review.booking.event.name %> </h2>
-          <p>  </p>
           <p><%= review.content %></p>
           <div class="card-review-stars">
-            <p><%= review.rating %></p>
+            <p>
+              <% review.rating.to_i.times do %>
+                <i class="fas fa-star"></i>
+              <% end %>
+            </p>
           </div>
-          <% end %>
         </div>
-      </div>
+            <% end %>
+      <% end %>
     </div>
-    <div class="">
-      <div class="card-show-details">
+    <div class="card-show">
+      <div class="card-show-infos">
         <%= cl_image_tag @event.studio.avatar.key%>
         <p>More about <%= @event.studio.name %></p></p>
         <p>Email : <%= @event.studio.email %> </p>
@@ -78,6 +90,3 @@
     </div>
   </div>
 </div>
-
-
-<%# ----------------------- %>

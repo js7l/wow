@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to event_path(@booking.event)
     else
+      flash[:alert] = "Something went wrong."
       render 'bookings/show'
     end
   end
