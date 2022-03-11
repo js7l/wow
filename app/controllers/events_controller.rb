@@ -7,11 +7,11 @@ class EventsController < ApplicationController
     @categories = Event::CATEGORIES
 
     if params[:query].present?
-      @events = Event.search_by(params[:query])
+      @events = Event.search_by(params[:query]).order(:date, :time)
     elsif params[:category].present?
-      @events = Event.where(category: params[:category])
+      @events = Event.where(category: params[:category]).order(:date, :time)
     else
-      @events = Event.order(:date)
+      @events = Event.order(:date, :time)
     end
 
     if params[:date].present?
@@ -33,6 +33,10 @@ class EventsController < ApplicationController
         image_url: helpers.asset_url("wow-logo.png")
       }
     end
+
+    #simple calender gem
+    start_date = params.fetch(:start_date, Date.today).to_date
+    @meetings = Event.where(start_time: start_date.beginning_of_week..(start_date.end_of_week + 1.day))
 
     respond_to do |format|
       format.html # Follow regular flow of Rails
