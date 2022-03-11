@@ -4,4 +4,21 @@
 
 .filters {
   background-color: $dark;
+
+  .control-label {
+    width: auto;
+    margin-right: 8px;
+  }
+
+  .event_category {
+    margin: 0px !important;
+  }
+
+  .event_time {
+    margin: 0px !important;
+  }
+
+  .event_date {
+    margin: 0px !important;
+  }
 }
