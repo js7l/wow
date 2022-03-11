@@ -15,6 +15,9 @@
      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
        Book Now
      </button>
+     <%= link_to event_favourite_path(@event), method: :post do %>
+      <i class="fas fa-heart"></i>
+     <% end %>
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -40,7 +43,6 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
               <%= link_to "Book Now",event_bookings_path(@event), method: :post, class: "btn btn-primary" %>
             </div>
           </div>
@@ -48,30 +50,22 @@
       </div>
     </div>
   </div>
-  <div class="card-wrapper">
+  <div class="card-wrapper ">
     <div class="card-show">
-          <p>Reviews :</p>
+      <p>Reviews :</p>
+      <% @event.reviews.each do |review| %>
         <div class="card-review p-3">
-          <h2>Product name</h2>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis optio delectus molestiae rem in? Minus consectetur ab nam sapiente hic, necessitatibus cum labore ipsum similique quia nemo blanditiis officia sit!</p>
+          <h2> <%= review.booking.event.name %> </h2>
+          <p><%= review.content %></p>
           <div class="card-review-stars">
-            <p>⭐⭐⭐⭐⭐</p>
+            <p>
+              <% review.rating.to_i.times do %>
+                <i class="fas fa-star"></i>
+              <% end %>
+            </p>
           </div>
         </div>
-        <div class="card-review p-3">
-          <h2>Product name</h2>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis optio delectus molestiae rem in? Minus consectetur ab nam sapiente hic, necessitatibus cum labore ipsum similique quia nemo blanditiis officia sit!</p>
-          <div class="card-review-stars">
-            <p>⭐⭐⭐⭐⭐</p>
-          </div>
-        </div>
-        <div class="card-review p-3">
-          <h2>Product name</h2>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis optio delectus molestiae rem in? Minus consectetur ab nam sapiente hic, necessitatibus cum labore ipsum similique quia nemo blanditiis officia sit!</p>
-          <div class="card-review-stars">
-            <p>⭐⭐⭐⭐⭐</p>
-          </div>
-        </div>
+      <% end %>
     </div>
     <div class="card-show">
       <div class="card-show-infos">
@@ -79,8 +73,8 @@
         <p>More about <%= @event.studio.name %></p></p>
         <p>Email : <%= @event.studio.email %> </p>
         <p> Phone : <%= @event.studio.phone_number %> </p>
-        <%= link_to "Contact Us", "#", class:"btn-primary"%>
-        <%= link_to "More Info", "#", class:"btn-secondary"  %>
+        <%= mail_to @event.studio.email, "Contact Us", class:"btn-primary"%>
+        <%= link_to "More Info", studio_path(@event.studio), class:"btn-secondary"  %>
       </div>
     </div>
   </div>

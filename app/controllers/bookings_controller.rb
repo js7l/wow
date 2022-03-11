@@ -1,5 +1,10 @@
 class BookingsController < ApplicationController
 
+  def show
+    @booking = Booking.find(params[:id])
+    @review = Review.new
+  end
+
   def create
     @booking = Booking.new
     @event = Event.find(params[:event_id])
@@ -14,12 +19,12 @@ class BookingsController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
   def update
-
+    @booking = Booking.find(params[:id])
+    @booking.status = params[:booking][:status]
+    if @booking.save
+      redirect_to dashboard_path
+    end
   end
 
 
