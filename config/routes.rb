@@ -11,12 +11,13 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  resources :chatrooms, only: :show do
+  resources :chatrooms, only: [:show ] do
     resources :messages, only: :create
   end
 
   resources :studios, only: [:new, :show, :create, :edit, :update] do
     resources :events, only: [:create]
+    resources :chatrooms, only: [:create]
   end
 
   get '/dashboard', to: 'pages#dashboard'
