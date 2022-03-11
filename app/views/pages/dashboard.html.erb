@@ -21,7 +21,9 @@
         </div>
       <% end %>
         <%# ---------- %>
+        <% if (booking_of_user.event.date <= Date.today() && booking_of_user.event.time <= Time.now)%>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= booking_of_user.id%>" data-bs-whatever="@getbootstrap">Leave a review</button>
+        <% end %>
       <div class="modal fade" id="exampleModal-<%= booking_of_user.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
