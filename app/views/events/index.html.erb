@@ -55,13 +55,14 @@
       <%= render 'class_lists', events: @events, events_group: @events_group %>
     </div>
     <div class="tab-pane fade container" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-      <%= week_calendar(events: @meetings) do |date, meetings| %>
+      <%= week_calendar(events: @events) do |date, events| %>
         <strong><%= date.strftime("%e %b %Y") %></strong>
         <hr>
 
-        <% meetings.each do |meeting| %>
+        <% events.each do |event| %>
           <div class="meeting card p-2">
-            <p><%= meeting.time.strftime('%k:%M') %> - <%= meeting.name %></p>
+            <%= cl_image_tag event.photo.key %>
+            <p><%= event.time.strftime('%k:%M') %> - <%= event.name %></p>
           </div>
         <% end %>
       <% end %>
