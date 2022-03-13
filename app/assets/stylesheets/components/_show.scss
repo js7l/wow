@@ -30,9 +30,10 @@
   }
 }
 .card-image {
-  object-fit: cover;
-  height: 100%;
-  background-repeat: no-repeat;
+  height: 500px;
+  width: 100%;
+  background-size: cover;
+
 }
 .card-wrapper-review {
 
