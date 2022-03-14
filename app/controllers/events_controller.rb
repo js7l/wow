@@ -22,6 +22,12 @@ class EventsController < ApplicationController
       @events = @events.where(time: params[:time])
     end
 
+    if params[:level].present?
+      @events = @events.where(level: params[:level])
+    end
+
+    # @events = @events.where('start_time > ?', DateTime.now)
+
     @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
     @studios = Studio.where(id: @events.pluck(:studio_id))
     # the `geocoded` scope filters only studios with coordinates (latitude & longitude)
