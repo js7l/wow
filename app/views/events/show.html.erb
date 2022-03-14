@@ -140,7 +140,9 @@
       </div>
     </div>
   </div>
+  <% if user_signed_in? %>
     <% if @chatroom %>
-    <%= render 'chatrooms/popup' %>
+      <%= render 'chatrooms/popup' %>
+    <% end %>
   <% end %>
 </div>
