@@ -1,55 +1,75 @@
-<div class="container">
-  <div class="card-wrapper mt-5">
+<div class="container pb-5" data-controller="popup">
+  <div class="card-wrapper  align-items-end mt-5 mb-5">
     <div class="card-show">
       <div class="card-image" style="background-image: url( <%= cl_image_path @event.photo.key, height: 400, crop: :fill%>)"></div>
     </div>
-    <div class="card-show ">
-      <h2><%= @event.name %></h2>
-      <p>Studio       : <%= @event.studio.name %></p>
-      <p>Address      : <%= @event.studio.address %></p>
-      <p>Instructor   :<%= @event.instructor %></p>
-      <p>Date, Time   :<%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
-      <p>Attendees    :<%= @event.limit_attendees %></p>
-      <p>Price        : IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
-      <p>Level        :<%= @event.level %> </p>
+    <div class="card-show h-100 d-flex flex-column justify-content-between">
+      <div class="card-show-name">
+        <h2><%= @event.name %> </h2>
+        <p> <em> with <%= @event.instructor %></em></p>
+        <p>  <%= @event.level %> Class</p>
+      </div>
+      <div class="item-details d-flex">
+        <div class="me-2">
+        <p><i class="fas fa-location-arrow"></i></p>
+        <p><i class="fas fa-calendar-alt"></i></p>
+        <p><i class="fas fa-user-friends"></i> </p>
+        <p><i class="fas fa-money-bill"></i></p>
+        </div>
+      <div class="item-value">
 
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Book Now
-      </button>
-        <% if user_signed_in? %>
-          <% if current_user.favorited?(@event) %>
-            <%= link_to event_unfavourite_path(@event), method: :delete, remote: true do %>
-              <i style="color: red;" class="fas fa-heart fa-2x"></i>
+          <p>  <%= @event.studio.address %></p>
+          <p>  <%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
+          <p>  <%= @event.bookings.count %> / <%= @event.limit_attendees %>
+          <p>  IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
+      </div>
+      </div>
+          <div class="item-button">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Book Now
+          </button>
+            <% if user_signed_in? %>
+              <% if current_user.favorited?(@event) %>
+                <%= link_to event_unfavourite_path(@event), method: :delete, remote: true do %>
+                  <i style="color: red;" class="fas fa-heart fa-2x"></i>
+                <% end %>
+              <% else %>
+                <%= link_to event_favourite_path(@event), method: :post, remote: true do %>
+                  <i style="color: red;" class="far fa-heart fa-2x"></i>
+                <% end %>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= link_to event_favourite_path(@event), method: :post, remote: true do %>
-              <i style="color: red;" class="far fa-heart fa-2x"></i>
-            <% end %>
-          <% end %>
-        <% end %>
+          </div>
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header bg-black">
+            <div class="modal-header bg-black h-50">
               <%= link_to root_path, class: "navbar-brand" do %>
-                <%= image_tag "wow-logo.png", class:"icon" %>
+                <%= image_tag "wow-logo.png", id:"icon" %>
               <% end %>
               <h5 class="modal-title text-white" id="exampleModalLabel"><%= @event.name %></h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <%= cl_image_tag @event.photo.key, width: 300, height: 300, crop: :fill  %>
+            <div class="card-image-modal" style="background-image: url( <%= cl_image_path @event.photo.key, height: 400, crop: :fill%>)"></div>
               <div class="modal-card lh-sm">
-                <p>Studio       : <%= @event.studio.name %></p>
-                <p>Address      : <%= @event.studio.address %></p>
-                <p>Instructor   :<%= @event.instructor %></p>
-                <p>Date, Time   :<%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
-                <p>Attendees    :<%= @event.limit_attendees %></p>
-                <p>Price        : IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
-                <p>Level        :<%= @event.level %> </p>
+                  <div class="item-details d-flex justify-content-center mt-3">
+                    <div>
+                      <p><i class="fas fa-location-arrow"></i></p>
+                      <p><i class="fas fa-calendar-alt"></i></p>
+                      <p><i class="fas fa-user-friends"></i> </p>
+                      <p><i class="fas fa-money-bill"></i></p>
+                    </div>
+                    <div>
+                      <p> : <%= @event.studio.address %></p>
+                      <p> :<%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
+                      <p> : <%= @event.bookings.count %> / <%= @event.limit_attendees %>
+                      <p> : IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <%= link_to "Book Now",event_bookings_path(@event), method: :post, class: "btn btn-primary" %>
@@ -59,36 +79,68 @@
       </div>
     </div>
   </div>
-  <div class="card-wrapper ">
+  <div class="card-wrapper bottom">
     <div class="card-show">
-      <p>Reviews :</p>
-      <% if @event.reviews.blank? %>
-      Be the first to leave a review for <%= @event.name %>
-      <% else %>
-      <% @event.reviews.each do |review| %>
-        <div class="card-review mb-3">
-          <h2> <%= review.booking.event.name %> </h2>
-          <p><%= review.content %></p>
-          <div class="card-review-stars">
-            <p>
-              <% review.rating.to_i.times do %>
-                <i class="fas fa-star text-warning"></i>
-              <% end %>
-            </p>
-          </div>
+      <div class="card-schedule">
+        <div class="border-0 mb-4">
+          <h4>More classes from <%= @event.studio.name %></h4>
+          <hr class="mt-0">
         </div>
-            <% end %>
-      <% end %>
+        <%# Class list start here %>
+        <div class="card-class-show">
+        <%= render 'studios/class_list', events: @events, events_group: @events_group %>
+        </div>
+        <%# class list end here %>
+      </div>
+
+      <div class="card-review-list border-0 mb-4 pt-3">
+      <h4>Reviews:</h4>
+      <div class="card-review-box">
+        <% if @event.reviews.blank? %>
+        Be the first to leave a review for <%= @event.name %>
+        <% else %>
+        <% @event.reviews.each do |review| %>
+          <div class="card-review mb-3">
+            <h2> <%= review.booking.event.name %> </h2>
+            <p><%= review.content %></p>
+            <div class="card-review-stars">
+              <p>
+                <% review.rating.to_i.times do %>
+                  <i class="fas fa-star text-warning"></i>
+                <% end %>
+              </p>
+            </div>
+          </div>
+              <% end %>
+        <% end %>
+      </div>
+      </div>
     </div>
     <div class="card-show">
       <div class="card-show-infos">
-        <%= cl_image_tag @event.studio.avatar.key%>
-        <p>More about <%= @event.studio.name %></p></p>
-        <p>Email : <%= @event.studio.email %> </p>
-        <p> Phone : <%= @event.studio.phone_number %> </p>
-        <%= mail_to @event.studio.email, "Contact Us", class:"btn-primary"%>
-        <%= link_to "More Info", studio_path(@event.studio), class:"btn-secondary"  %>
+        <div class="border-0 mb-4">
+          <h4>More about <%= @event.studio.name %></h4>
+          <hr class="mt-0">
+        </div>
+        <div class="text-center">
+          <%= cl_image_tag @event.studio.avatar.key%>
+          <p>Email : <%= @event.studio.email %> </p>
+          <p> Phone : <%= @event.studio.phone_number %> </p>
+          <button type="button" class="btn" data-action="click->popup#show">
+             <i class="fas fa-comments fs-5"></i>
+          </button>
+          <%= link_to studio_path(@event.studio) do%>
+          <i class="fas fa-info-circle fs-5"></i>
+          <% end %>
+        </div>
+        <div class="card-map mt-4">
+          <h5>Where to find us</h5>
+          <%= render 'shared/map' %>
+        </div>
       </div>
     </div>
   </div>
+    <% if @chatroom %>
+    <%= render 'chatrooms/popup' %>
+  <% end %>
 </div>

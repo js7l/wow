@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  resources :chatrooms, only: [:show ] do
+  resources :chatrooms, only: [:index, :show ] do
     resources :messages, only: :create
   end
 
