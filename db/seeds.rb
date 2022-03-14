@@ -135,7 +135,7 @@ file = File.open(Rails.root.join("app/assets/images/muaythai.jpeg"))
 muaythai.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
 muaythai.save!
 
-weightlifting = Event.new(name: "Weight Lifting", category: "Weight Lifting", date: Date.today + 1.day, time: Time.parse('15:00'), duration: 90, description: "Olympic Weightlifting is the sport of Strength, Power, Speed and Precision. In competition, the lifts are comprised of the Snatch and the Clean & Jerk – both of which are efforts to lift the maximum amount of weight from ground to overhead in two distinct ways. In training, weightlifting and accessory exercises challenge the mind and body to grow strong and powerful through repetition after repetition of the basics.",
+weightlifting = Event.new(name: "Weight Lifting", category: "Weight-Lifting", date: Date.today + 1.day, time: Time.parse('15:00'), duration: 90, description: "Olympic Weightlifting is the sport of Strength, Power, Speed and Precision. In competition, the lifts are comprised of the Snatch and the Clean & Jerk – both of which are efforts to lift the maximum amount of weight from ground to overhead in two distinct ways. In training, weightlifting and accessory exercises challenge the mind and body to grow strong and powerful through repetition after repetition of the basics.",
   price: 130000, instructor: "Andrey", studio: bodyfactory, limit_attendees: 8, level: "All Levels")
 file = File.open(Rails.root.join("app/assets/images/weightlifting.jpeg"))
 weightlifting.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')

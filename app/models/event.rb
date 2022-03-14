@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  CATEGORIES = ["Yoga", "Surfing", "HIIT", "Boxing", "Weight Lifting", "Crossfit", "Swimming", "Others"]
+  CATEGORIES = ["Yoga", "Surfing", "HIIT", "Boxing", "Weight-Lifting", "Crossfit", "Swimming", "Others"]
   LEVELS = ["Beginner", "Intermediate", "Advanced", "All Levels"]
 
   before_save :add_start_time_end_time_after_creation
