@@ -1,6 +1,6 @@
 <div class="container" id="studio-show" data-controller="popup">
   <div class="card-wrapper-studio mt-5">
-    <div class="card-image" style="background-image: url('<%= cl_image_path @studio.events.first.photo.key, crop: :fill %>')">
+    <div class="card-studio-image" style="background-image: url('<%= cl_image_path @studio.events.first.photo.key, crop: :fill %>')">
     </div>
     <div class="card-show">
       <h2><%= @studio.name %></h2>
