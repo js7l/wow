@@ -1,0 +1,43 @@
+#studio-show {
+  .card-show {
+    margin-left: 50px;
+    .icon-star {
+      color:#eeca28;
+    }
+
+    .icon-empty {
+      color: transparent;
+    }
+  }
+
+  .card-wrapper-studio {
+    margin-top: 50px;
+  }
+
+  .card-schedule {
+    margin-left: 20px;
+  }
+
+  .card-membership {
+    margin-left: 10px;
+    .card-membership-package {
+      display: flex;
+    }
+  }
+
+  .card-studio-image {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    image-rendering: optimizeQuality;
+  }
+
+  .card-wrapper-studio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card-map #map {
+    height: 35vh !important;
+  }
+}

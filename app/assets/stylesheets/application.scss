@@ -9,6 +9,8 @@
 @import "font-awesome";
 @import "mapbox-gl/dist/mapbox-gl";
 @import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder";
+@import "jquery-bar-rating/dist/themes/css-stars";
+@import "simple_calendar";
 
 // Your CSS partials
 @import "components/index";
@@ -33,4 +35,9 @@ p {
 
 a {
   text-decoration: none;
+  color: $dark;
+
+  &:hover {
+    color: $dark;
+  }
 }

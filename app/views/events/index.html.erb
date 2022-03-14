@@ -1,30 +1,66 @@
-<div class="container my-4 d-flex">
-  <div class="class-list">
-    <h2><%= @events.count %> classes found</h2>
-    <% @events_group.each do |date_time, events| %>
-    <div class="card-events">
-      <p class="mb-1"><%= date_time[0].strftime("%e %b %Y") %>, <%= date_time[1] %></p>
-      <hr class="mt-0">
-      <% events.each do |event| %>
-      <div class="card-event">
-        <%= cl_image_tag event.photo.key %>
-        <div class="card-event-infos">
-          <h2><%= event.name %></h2>
-          <p><em>by <%= event.studio.name %></em></p>
-          <p><i class="fas fa-user-friends"></i> <%= event.bookings.count %> / 15</p>
-          <p><%= event.date.strftime("%e %b %Y") %>, <%= event.time.strftime('%I:%M %p') %></p>
-        </div>
-        <div class="card-event-price">
-          <strong>IDR <%= number_with_delimiter(event.price, :delimiter => '.') %></strong>
+<div data-controller="filter-events">
+  <div class="filters d-flex justify-content-between p-2">
+    <%= simple_form_for :event, url: events_path, method: :post, remote: true, html: { class:"filters d-flex text-white mb-0", data: { filter_events_target: 'form' } } do |f| %>
+      <div class="form-group d-flex align-items-center me-4 justify-content-between">
+        <label for="field-1" class="col-sm-3 control-label">Category</label>
+        <div class="d-flex align-items-center">
+        <%= f.input :category, :required => false,
+                      collection: Event::CATEGORIES, label: false, prompt: "Select category",
+                      input_html: { \
+                        "data-filter-events-target": "inputCategory", \
+                        "data-action": "change->filter-events#updateView" \
+                      }
+                    %>
         </div>
       </div>
-      <% end %>
-    </div>
+      <div class="form-group d-flex align-items-center me-4 justify-content-between">
+        <label for="field-1" class="col-sm-3 control-label">Level</label>
+        <div class="d-flex align-items-center">
+        <%= f.input :level, :required => false,
+                      collection: Event::LEVELS, label: false, prompt: "Select level",
+                      input_html: { \
+                        "data-filter-events-target": "inputLevel", \
+                        "data-action": "change->filter-events#updateView" \
+                      }
+                    %>
+        </div>
+      </div>
+      <div class="form-group d-flex align-items-center me-4 justify-content-between">
+        <label for="field-1" class="col-sm-3 control-label">Date</label>
+        <div class="d-flex align-items-center">
+        <%= f.input :date, as: :date, :required => false, html5: true, label: false,
+                    wrapper_html: { class:"d-flex align-items-center me-4" },
+                    input_html: { \
+                      "data-filter-events-target": "inputDate", \
+                      "data-action": "input->filter-events#updateView" \
+                    }
+                  %>
+        </div>
+      </div>
+      <div class="form-group d-flex align-items-center me-4 justify-content-between">
+        <label for="field-1" class="col-sm-3 control-label">Time</label>
+        <div class="d-flex align-items-center">
+        <%= f.input :time, as: :time, :required => false, html5: true, label: false,
+                    wrapper_html: { class:"d-flex align-items-center me-4" },
+                    input_html: {
+                      "data-filter-events-target": "inputTime",
+                      "data-action": "input->filter-events#updateView",
+                      step: 1800
+                    }
+                  %>
+        </div>
+      </div>
     <% end %>
+    <div>
+      <ul class="nav nav-pills" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" data-filter-events-target="listButton">List View</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" data-filter-events-target="calendarButton">Calendar View</button>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div style="width: 100%; height: 600px;"
-  data-controller="mapbox"
-  data-mapbox-markers-value="<%= @markers.to_json %>"
-  data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
+  <%= render 'class_view', events: @events, events_group: @events_group %>
 </div>

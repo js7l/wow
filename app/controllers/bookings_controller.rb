@@ -1,0 +1,31 @@
+class BookingsController < ApplicationController
+
+  def show
+    @booking = Booking.find(params[:id])
+    @review = Review.new
+  end
+
+  def create
+    @booking = Booking.new
+    @event = Event.find(params[:event_id])
+    @booking.user = current_user
+    @booking.total_price = @event.price
+    @booking.status = "Confirmed"
+    @booking.event = @event
+    if @booking.save
+      redirect_to dashboard_path
+    else
+      render "events/show"
+    end
+  end
+
+  def update
+    @booking = Booking.find(params[:id])
+    @booking.status = params[:booking][:status]
+    if @booking.save
+      redirect_to dashboard_path
+    end
+  end
+
+
+end

@@ -1,0 +1,61 @@
+<div class="container">
+    <h2>Dashboard</h2>
+    <div class="d-flex mt-3">
+      <%= cl_image_tag current_user.avatar.key, class: "avatar-large" %>
+      <div class="ms-4">
+        <p class="m-0"><strong><%= current_user.first_name %> <%= current_user.last_name %></strong></p>
+        <p class="m-0"><%= current_user.email %></p>
+      </div>
+    </div>
+  <div class="my-4">
+    <h3>My Bookings</h3>
+    <% @bookings_of_user.each do |booking_of_user| %>
+      <div class="card-product mt-3 d-flex justify-content-between">
+        <%= cl_image_tag booking_of_user.event.photo.key %>
+        <div class="card-product-infos">
+      <%= link_to event_path(booking_of_user.event) do %>
+          <h2><%= booking_of_user.event.name %></h2>
+          <p>Date, Time: <%= booking_of_user.event.date.strftime("%e %b %Y") %> - <%= booking_of_user.event.time.strftime('%I:%M %p') %></p>
+          <p>Status: <%= booking_of_user.status %></p>
+          <h3>Total Price: <strong>IDR <%= number_with_delimiter(booking_of_user.total_price, :delimiter => '.') %></strong></h3>
+        </div>
+      <% end %>
+        <%# ---------- %>
+        <% if (booking_of_user.event.date <= Date.today() && booking_of_user.event.time <= Time.now)%>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= booking_of_user.id%>" data-bs-whatever="@getbootstrap">Leave a review</button>
+        <% end %>
+      <div class="modal fade" id="exampleModal-<%= booking_of_user.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Type your review for <%= booking_of_user.event.name %> </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <%= simple_form_for [booking_of_user, @review], html: { id: "review-booking-#{booking_of_user.id}" } do |f| %>
+                <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: { class: "review-book-form" } %>
+                <%= f.input :content, placeholder: "Min 20 character" %>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" form="review-booking-<%= booking_of_user.id %>">Send Review</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <% end %>
+    </div>
+  <div class="my-4">
+  <h3>My Favorite Classes</h3>
+   <% @favorited_events.each do |favorited_event| %>
+    <div class="card-product mt-3 d-flex justify-content-between">
+      <%= cl_image_tag favorited_event.photo.key %>
+      <div class="card-product-infos">
+        <h2><%= favorited_event.name %></h2>
+        <p>Date, Time: <%= favorited_event.date.strftime("%e %b %Y") %> - <%= favorited_event.time.strftime('%I:%M %p') %></p>
+      </div>
+    </div>
+    <% end %>
+</div>

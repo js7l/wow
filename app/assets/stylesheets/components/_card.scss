@@ -6,7 +6,15 @@
   display: flex;
   border-radius: 10px;
   align-items: center;
-  // box-shadow: 0 0 1px rgba(0,0,0,0.2);
+  margin-bottom: 16px;
+  box-shadow: 0 0 1px rgba(0,0,0,0.2);
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+
   img {
     border-radius: 10px;
     margin: 18px 0;
@@ -36,26 +44,6 @@
   .card-event-price {
     justify-content: flex-end;
     align-self: flex-end;
-  }
-}
-
-.card-category {
-  background-size: cover;
-  background-position: center;
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 10px;
-  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  transition: all .2s ease-in-out;
-
-  &:hover {
-    transform: scale(1.01);
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
   }
 }
 
@@ -181,4 +169,160 @@
     color: #eeca28;
     font-size: 24px;
   }
+}
+
+.card-product {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+
+  h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 1.4;
+    opacity: .7;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+}
+
+.card-product img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.card-product .card-product-infos {
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.card-product-right {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 16px;
+  img {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.fa-check-circle {
+  font-size: 30px;
+  color: rgb(18, 211, 18);
+  &:hover {
+    color:rgb(15, 117, 15);
+  }
+}
+
+.fa-times-circle {
+  font-size: 30px;
+  color: red;
+  &:hover {
+    color:rgb(129, 10, 10);
+  }
+}
+
+.card-calendar-group {
+  background-color: $light;
+  border-radius: 10px;
+  margin-bottom: 8px;
+
+  p {
+    padding-top: 8px;
+    padding-left: 8px;
+  }
+}
+
+.card-calendar {
+  margin-bottom: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  transition: all .2s ease-in-out;
+  text-align: start;
+
+  img {
+    margin-right: 8px;
+    border-radius: 10px;
+  }
+
+  p {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+  }
+
+  &:hover {
+    background-color: rgba(0,0,0,.1);
+  }
+}
+
+.card-map {
+    overflow: hidden;
+    background: white;
+    align-items: center;
+
+  h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 8px;
+  }
+
+  p {
+    font-size: 12px;
+    opacity: .7;
+    margin: 0;
+  }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.card-chatrooms-whole {
+
+  .card-chatroom {
+    padding: 10px;
+    overflow: hidden;
+    height: 80px;
+    background: white;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    margin: 15px 30px 15px 0px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.5);
+    transition: all .2s ease-in-out;
+    margin-left: 15px;
+    width: 40vw;
+
+    &:hover {
+      transform: scale(1.01);
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+  }
+
+  .avatar-small {
+    margin-top: 25px;
+  }
+
 }

@@ -1,0 +1,53 @@
+<div class="container" id="studio-show" data-controller="popup">
+  <div class="card-wrapper-studio mt-5">
+    <div class="card-studio-image" style="background-image: url('<%= cl_image_path @studio.events.first.photo.key, crop: :fill %>')">
+    </div>
+    <div class="card-show">
+      <h2><%= @studio.name %></h2>
+      <div>
+        <span class="fa fa-star icon-star"></span>
+        <span class="fa fa-star icon-star"></span>
+        <span class="fa fa-star icon-star"></span>
+        <span class="fa fa-star icon-empty"></span>
+        <span class="fa fa-star icon-empty"></span>
+      </div>
+      <p><%= @studio.description %></p>
+      <p>Email: <%= @studio.email %></p>
+      <p>Phone number: <%= @studio.phone_number %></p>
+      <% if @chatroom %>
+        <button type="button" class="btn btn-primary" data-action="click->popup#show">
+          Contact Us
+        </button>
+      <% else %>
+        <%= link_to "Contact Us", studio_chatrooms_path(@studio), method: :post, class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-wrapper-studio">
+    <div class="card-schedule">
+      <div class="border-0 mb-4">
+        <h4>Schedule</h4>
+        <hr class="mt-0">
+      </div>
+      <%= render 'class_list', events: @events, events_group: @events_group %>
+    </div>
+    <div class="card-membership">
+      <div class="border-0 mb-4">
+        <h4>Membership Plan</h4>
+        <hr class="mt-0">
+      </div>
+      <div class="card-membership-package">
+        <%= render 'shared/card_package' %>
+        <%= render 'shared/card_package' %>
+        <%= render 'shared/card_package' %>
+      </div>
+      <div class="card-map mt-4">
+        <h5>Where to find us</h5>
+        <%= render 'shared/map' %>
+      </div>
+    </div>
+  </div>
+  <% if @chatroom %>
+    <%= render 'chatrooms/popup' %>
+  <% end %>
+</div>

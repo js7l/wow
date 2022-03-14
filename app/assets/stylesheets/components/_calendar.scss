@@ -1,0 +1,20 @@
+.meeting {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 10px;
+  background: #1EDD88;
+  transition: background 0.3s ease;
+  margin-bottom: 8px;
+
+  img {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+
+.meeting:hover {
+  background: #1BCB7F;
+  color: white;
+}
