@@ -182,5 +182,5 @@ puts "Creating chatroom"
 chatroom1 = Chatroom.new(user: ratna, studio: canggu)
 chatroom1.save!
 
-#message
+# message
 message1 = Message.create!(content: "Hello", user: ratna, chatroom: chatroom1)
