@@ -31,6 +31,7 @@ class EventsController < ApplicationController
     @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
     @studios = Studio.where(id: @events.pluck(:studio_id))
     # the `geocoded` scope filters only studios with coordinates (latitude & longitude)
+
     @markers = @studios.geocoded.map do |studio|
       {
         lat: studio.latitude,
@@ -42,17 +43,32 @@ class EventsController < ApplicationController
 
     #simple calender gem
     start_date = params.fetch(:start_date, Date.today).to_date
-    @meetings = Event.where(start_time: start_date.beginning_of_week..(start_date.end_of_week + 1.day))
-
+    @meetings = Event.where(start_time: start_date..(start_date + 8.day))
     respond_to do |format|
       format.html # Follow regular flow of Rails
-      format.text { render partial: 'class_lists', locals: { events: @events, events_group: @events_group }, formats: [:html] }
+      format.text { render partial: 'class_view', locals: { events: @events, events_group: @events_group }, formats: [:html] }
     end
   end
 
   def show
     @event = Event.find(params[:id])
-    # @studio = Studio.find(params[:event_id])
+    @studio = @event.studio
+    @events = Event.where(studio: @studio)
+    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
+    @markers = [{
+      lat: @studio.latitude,
+      lng: @studio.longitude,
+      info_window: render_to_string(partial: "events/info_window", locals: { studio: @studio }, formats: [:html]),
+      image_url: helpers.asset_url("wow-logo.png")
+    }] # marker for the current studio
+    @chatroom = Chatroom.find_by(user: current_user, studio: @studio)
+    if @chatroom.nil?
+      @chatroom = Chatroom.new
+      @chatroom.studio = @studio
+      @chatroom.user = current_user
+      @chatroom.save
+    end
+    @message = Message.new # input form
   end
 
   def new

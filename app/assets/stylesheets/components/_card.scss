@@ -238,3 +238,91 @@
     color:rgb(129, 10, 10);
   }
 }
+
+.card-calendar-group {
+  background-color: $light;
+  border-radius: 10px;
+  margin-bottom: 8px;
+
+  p {
+    padding-top: 8px;
+    padding-left: 8px;
+  }
+}
+
+.card-calendar {
+  margin-bottom: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  transition: all .2s ease-in-out;
+  text-align: start;
+
+  img {
+    margin-right: 8px;
+    border-radius: 10px;
+  }
+
+  p {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+  }
+
+  &:hover {
+    background-color: rgba(0,0,0,.1);
+  }
+}
+
+.card-map {
+    overflow: hidden;
+    background: white;
+    align-items: center;
+
+  h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 8px;
+  }
+
+  p {
+    font-size: 12px;
+    opacity: .7;
+    margin: 0;
+  }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.card-chatrooms-whole {
+
+  .card-chatroom {
+    padding: 10px;
+    overflow: hidden;
+    height: 80px;
+    background: white;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    margin: 15px 30px 15px 0px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.5);
+    transition: all .2s ease-in-out;
+    margin-left: 15px;
+    width: 40vw;
+
+    &:hover {
+      transform: scale(1.01);
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+  }
+
+  .avatar-small {
+    margin-top: 25px;
+  }
+
+}
