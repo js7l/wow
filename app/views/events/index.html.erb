@@ -26,6 +26,18 @@
         </div>
       </div>
       <div class="form-group d-flex align-items-center me-4 justify-content-between">
+        <label for="field-1" class="col-sm-3 control-label">Level</label>
+        <div class="d-flex align-items-center">
+        <%= f.input :level, :required => false,
+                      collection: Event::LEVELS, label: false, prompt: "Select level",
+                      input_html: { \
+                        "data-filter-events-target": "inputLevel", \
+                        "data-action": "change->filter-events#updateList" \
+                      }
+                    %>
+        </div>
+      </div>
+      <div class="form-group d-flex align-items-center me-4 justify-content-between">
         <label for="field-1" class="col-sm-3 control-label">Date</label>
         <div class="d-flex align-items-center">
         <%= f.input :date, as: :date, :required => false, html5: true, label: false,
@@ -62,5 +74,26 @@
       </ul>
     </div>
   </div>
+<<<<<<< HEAD
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <%= render 'class_lists', events: @events, events_group: @events_group %>
+    </div>
+    <div class="tab-pane fade container" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <%= week_calendar(events: @meetings) do |date, meetings| %>
+        <strong><%= date.strftime("%e %b %Y") %>
+        </strong>
+        <hr>
+
+        <% meetings.each do |meeting| %>
+          <div class="meeting card p-2">
+            <p><%= meeting.time.strftime('%k:%M') %> - <%= meeting.name %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+=======
   <%= render 'class_view', events: @events, events_group: @events_group %>
+>>>>>>> c1395a4ca8f248c19c9fb0c168220d978f6d3ab6
 </div>
