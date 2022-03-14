@@ -2,8 +2,11 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 70vh;
+  &.bottom {
+    height: 70vh;
+  }
 }
+
 .card-show {
   padding-right: 10px;
   line-height: 30px;
@@ -25,9 +28,7 @@
     width: 200px;
     object-fit: contain;
   }
-  .icon{
-    height: 100px;
-  }
+
 }
 .card-image {
   height: 500px;
@@ -35,13 +36,41 @@
   background-size: cover;
 
 }
-.card-wrapper-review {
-
+.card-image-modal {
+  height: 300px;
+  width: 100%;
+  background-size: cover;
+  .icon {
+    width: 30px;
+  }
+}
+.card-review-box {
+  height: 100px;
+  overflow-y: scroll;
 }
 
 .modal-body {
   line-height: 30px;
 }
-.icon {
-  width: 30px;
+.modal-content {
+  width: 80%;
+}
+
+.card-class-show {
+  height: 360px;
+  overflow-y: scroll;
+}
+
+.navbar-bar {
+  height: 20px;
+}
+#icon{
+  height: 50px;
+  margin-left: -70px;
+}
+
+.item-button {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
