@@ -5,10 +5,22 @@
         <label for="field-1" class="col-sm-3 control-label">Category</label>
         <div class="d-flex align-items-center">
         <%= f.input :category, :required => false,
-                      collection: Event::CATEGORIES, label: false,
+                      collection: Event::CATEGORIES, label: false, prompt: "Select category",
                       input_html: { \
                         "data-filter-events-target": "inputCategory", \
-                        "data-action": "change->filter-events#updateList" \
+                        "data-action": "change->filter-events#updateView" \
+                      }
+                    %>
+        </div>
+      </div>
+      <div class="form-group d-flex align-items-center me-4 justify-content-between">
+        <label for="field-1" class="col-sm-3 control-label">Level</label>
+        <div class="d-flex align-items-center">
+        <%= f.input :level, :required => false,
+                      collection: Event::LEVELS, label: false, prompt: "Select level",
+                      input_html: { \
+                        "data-filter-events-target": "inputLevel", \
+                        "data-action": "change->filter-events#updateView" \
                       }
                     %>
         </div>
@@ -20,7 +32,7 @@
                     wrapper_html: { class:"d-flex align-items-center me-4" },
                     input_html: { \
                       "data-filter-events-target": "inputDate", \
-                      "data-action": "input->filter-events#updateList" \
+                      "data-action": "input->filter-events#updateView" \
                     }
                   %>
         </div>
@@ -32,7 +44,7 @@
                     wrapper_html: { class:"d-flex align-items-center me-4" },
                     input_html: {
                       "data-filter-events-target": "inputTime",
-                      "data-action": "input->filter-events#updateList",
+                      "data-action": "input->filter-events#updateView",
                       step: 1800
                     }
                   %>
@@ -42,29 +54,13 @@
     <div>
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">List View</button>
+          <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" data-filter-events-target="listButton">List View</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Calendar View</button>
+          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" data-filter-events-target="calendarButton">Calendar View</button>
         </li>
       </ul>
     </div>
   </div>
-  <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-      <%= render 'class_lists', events: @events, events_group: @events_group %>
-    </div>
-    <div class="tab-pane fade container" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-      <%= week_calendar(events: @meetings) do |date, meetings| %>
-        <strong><%= date.strftime("%e %b %Y") %></strong>
-        <hr>
-
-        <% meetings.each do |meeting| %>
-          <div class="meeting card p-2">
-            <p><%= meeting.time.strftime('%k:%M') %> - <%= meeting.name %></p>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'class_view', events: @events, events_group: @events_group %>
 </div>
