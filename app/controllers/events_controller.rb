@@ -29,6 +29,7 @@ class EventsController < ApplicationController
     @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
     @studios = Studio.where(id: @events.pluck(:studio_id))
     # the `geocoded` scope filters only studios with coordinates (latitude & longitude)
+
     @markers = @studios.geocoded.map do |studio|
       {
         lat: studio.latitude,
@@ -40,11 +41,10 @@ class EventsController < ApplicationController
 
     #simple calender gem
     start_date = params.fetch(:start_date, Date.today).to_date
-    @meetings = Event.where(start_time: start_date.beginning_of_week..(start_date.end_of_week + 1.day))
-
+    @meetings = Event.where(start_time: start_date..(start_date + 8.day))
     respond_to do |format|
       format.html # Follow regular flow of Rails
-      format.text { render partial: 'class_lists', locals: { events: @events, events_group: @events_group }, formats: [:html] }
+      format.text { render partial: 'class_view', locals: { events: @events, events_group: @events_group }, formats: [:html] }
     end
   end
 

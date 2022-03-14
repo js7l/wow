@@ -8,7 +8,7 @@
                       collection: Event::CATEGORIES, label: false, prompt: "Select category",
                       input_html: { \
                         "data-filter-events-target": "inputCategory", \
-                        "data-action": "change->filter-events#updateList" \
+                        "data-action": "change->filter-events#updateView" \
                       }
                     %>
         </div>
@@ -20,7 +20,7 @@
                       collection: Event::LEVELS, label: false, prompt: "Select level",
                       input_html: { \
                         "data-filter-events-target": "inputLevel", \
-                        "data-action": "change->filter-events#updateList" \
+                        "data-action": "change->filter-events#updateView" \
                       }
                     %>
         </div>
@@ -32,7 +32,7 @@
                     wrapper_html: { class:"d-flex align-items-center me-4" },
                     input_html: { \
                       "data-filter-events-target": "inputDate", \
-                      "data-action": "input->filter-events#updateList" \
+                      "data-action": "input->filter-events#updateView" \
                     }
                   %>
         </div>
@@ -44,7 +44,7 @@
                     wrapper_html: { class:"d-flex align-items-center me-4" },
                     input_html: {
                       "data-filter-events-target": "inputTime",
-                      "data-action": "input->filter-events#updateList",
+                      "data-action": "input->filter-events#updateView",
                       step: 1800
                     }
                   %>
@@ -54,39 +54,13 @@
     <div>
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">List View</button>
+          <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" data-filter-events-target="listButton">List View</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Calendar View</button>
+          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" data-filter-events-target="calendarButton">Calendar View</button>
         </li>
       </ul>
     </div>
   </div>
-  <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade container" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-      <%= render 'class_lists', events: @events, events_group: @events_group %>
-    </div>
-    <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-      <%= week_calendar(events: @events) do |date, events| %>
-        <strong><%= date.strftime("%e %b %Y") %></strong>
-        <hr>
-        <% event_grouped_by_time = events.group_by { |event| event.time.strftime('%k:%M') } %>
-        <% event_grouped_by_time.each do |time, events_per_time| %>
-          <div class="card-calendar-group">
-            <p class="mb-1"><%= time %></p>
-            <% events_per_time.each do |event_per_time| %>
-              <div class="card-calendar p-2">
-                <%= cl_image_tag event_per_time.photo.key, width: "50px", height: "50px" %>
-                <div>
-                  <p><%= event_per_time.name %></p>
-                  <p><em>by <%= event_per_time.studio.name %></em></p>
-                  <p>IDR <%= number_with_delimiter(event_per_time.price, :delimiter => '.') %></p>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'class_view', events: @events, events_group: @events_group %>
 </div>

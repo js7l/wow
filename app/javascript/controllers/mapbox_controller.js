@@ -21,6 +21,9 @@ export default class extends Controller {
 
     // this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
     // mapboxgl: mapboxgl }))
+    setTimeout(() => {
+      this.map.resize()
+    }, 1500);
   }
 
   #addMarkersToMap() {
