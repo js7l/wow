@@ -25,7 +25,7 @@
     <div class="cards-vertical">
       <% @categories.each do |category| %>
         <%= link_to events_path(category: category) do %>
-          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image_path "muaythai.jpeg" %>)">
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image_path "#{category}.jpg" %>)">
             <%= category %>
           </div>
         <% end %>
