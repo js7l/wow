@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require "open-uri"
 
+puts "Destroying all reviews"
+Review.destroy_all
 puts "Destroying all users"
 User.destroy_all
 puts "Destroying all studios"
@@ -15,6 +17,7 @@ puts "Destroying all sessions"
 Event.destroy_all
 puts "Destroying chatroom"
 Chatroom.destroy_all
+
 
 puts "Creating users"
 file = File.open(Rails.root.join("app/assets/images/ratna.png"))
