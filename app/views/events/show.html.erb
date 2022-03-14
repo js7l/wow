@@ -124,17 +124,21 @@
         </div>
         <div class="text-center">
           <%= cl_image_tag @event.studio.avatar.key%>
+          <div class="m-3">
           <p>Email : <%= @event.studio.email %> </p>
           <p> Phone : <%= @event.studio.phone_number %> </p>
+          </div>
+          <div>
           <button type="button" class="btn" data-action="click->popup#show">
-             <i class="fas fa-comments fs-5"></i>
+            <i class="far fa-comments fs-5"></i>
           </button>
           <%= link_to studio_path(@event.studio) do%>
           <i class="fas fa-info-circle fs-5"></i>
           <% end %>
+          </div>
         </div>
         <div class="card-map mt-4">
-          <h5>Where to find us</h5>
+          <h4>Where to find us</h4>
           <%= render 'shared/map' %>
         </div>
       </div>
