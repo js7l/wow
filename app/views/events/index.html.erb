@@ -5,9 +5,21 @@
         <label for="field-1" class="col-sm-3 control-label">Category</label>
         <div class="d-flex align-items-center">
         <%= f.input :category, :required => false,
-                      collection: Event::CATEGORIES, label: false,
+                      collection: Event::CATEGORIES, label: false, prompt: "Select category",
                       input_html: { \
                         "data-filter-events-target": "inputCategory", \
+                        "data-action": "change->filter-events#updateList" \
+                      }
+                    %>
+        </div>
+      </div>
+      <div class="form-group d-flex align-items-center me-4 justify-content-between">
+        <label for="field-1" class="col-sm-3 control-label">Level</label>
+        <div class="d-flex align-items-center">
+        <%= f.input :level, :required => false,
+                      collection: Event::LEVELS, label: false, prompt: "Select level",
+                      input_html: { \
+                        "data-filter-events-target": "inputLevel", \
                         "data-action": "change->filter-events#updateList" \
                       }
                     %>
@@ -51,18 +63,27 @@
     </div>
   </div>
   <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+    <div class="tab-pane fade container" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
       <%= render 'class_lists', events: @events, events_group: @events_group %>
     </div>
-    <div class="tab-pane fade container" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
       <%= week_calendar(events: @events) do |date, events| %>
         <strong><%= date.strftime("%e %b %Y") %></strong>
         <hr>
-
-        <% events.each do |event| %>
-          <div class="meeting card p-2">
-            <%= cl_image_tag event.photo.key %>
-            <p><%= event.time.strftime('%k:%M') %> - <%= event.name %></p>
+        <% event_grouped_by_time = events.group_by { |event| event.time.strftime('%k:%M') } %>
+        <% event_grouped_by_time.each do |time, events_per_time| %>
+          <div class="card-calendar-group">
+            <p class="mb-1"><%= time %></p>
+            <% events_per_time.each do |event_per_time| %>
+              <div class="card-calendar p-2">
+                <%= cl_image_tag event_per_time.photo.key, width: "50px", height: "50px" %>
+                <div>
+                  <p><%= event_per_time.name %></p>
+                  <p><em>by <%= event_per_time.studio.name %></em></p>
+                  <p>IDR <%= number_with_delimiter(event_per_time.price, :delimiter => '.') %></p>
+                </div>
+              </div>
+            <% end %>
           </div>
         <% end %>
       <% end %>

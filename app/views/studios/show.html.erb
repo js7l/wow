@@ -1,4 +1,4 @@
-<div class="container" id="studio-show">
+<div class="container" id="studio-show" data-controller="popup">
   <div class="card-wrapper-studio mt-5">
     <div class="card-image" style="background-image: url('<%= cl_image_path @studio.events.first.photo.key, crop: :fill %>')">
     </div>
@@ -14,26 +14,27 @@
       <p><%= @studio.description %></p>
       <p>Email: <%= @studio.email %></p>
       <p>Phone number: <%= @studio.phone_number %></p>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Contact Us
-      </button>
+      <% if @chatroom %>
+        <button type="button" class="btn btn-primary" data-action="click->popup#show">
+          Contact Us
+        </button>
+      <% else %>
+        <%= link_to "Contact Us", studio_chatrooms_path(@studio), method: :post, class:"btn btn-primary" %>
+      <% end %>
     </div>
   </div>
   <div class="card-wrapper-studio">
     <div class="card-schedule">
-      <div class="border-bottom mb-4">
+      <div class="border-0 mb-4">
         <h4>Schedule</h4>
-        <br>
+        <hr class="mt-0">
       </div>
-      <%= render 'shared/card_event' %>
-      <%= render 'shared/card_event' %>
-      <%= render 'shared/card_event' %>
-      <%= render 'shared/card_event' %>
+      <%= render 'class_list', events: @events, events_group: @events_group %>
     </div>
     <div class="card-membership">
-      <div class="border-bottom mb-4">
+      <div class="border-0 mb-4">
         <h4>Membership Plan</h4>
-        <br>
+        <hr class="mt-0">
       </div>
       <div class="card-membership-package">
         <%= render 'shared/card_package' %>
@@ -45,6 +46,8 @@
         <%= render 'shared/map' %>
       </div>
     </div>
-    <%# <%= render 'shared/chatroom' %> %>
   </div>
+  <% if @chatroom %>
+    <%= render 'chatrooms/popup' %>
+  <% end %>
 </div>
