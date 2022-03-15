@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <div class="container class-list my-2">
+  <div class="container class-list my-2 px-4">
     <h2><%= pluralize events.count, "class" %> found</h2>
     <% events_group.each do |date_time, events| %>
     <div class="card-events mb-4">
@@ -23,6 +23,9 @@
       <% end %>
     </div>
     <% end %>
+    <div class="text-center">
+      <button class="btn-round mx-auto" data-controller="navigation" data-action="click->navigation#scrollToTop"><i class="fas fa-arrow-up"></i></button>
+    </div>
   </div>
   <%= render 'shared/map' %>
 </div>

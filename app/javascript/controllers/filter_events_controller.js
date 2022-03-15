@@ -1,11 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["form", "view", "inputCategory", "inputDate", "inputTime", "inputLevel", "listButton", "calendarButton", "listView", "calendarView"]
-
-  connect() {
-    console.log("Hello from filter events.js")
-  }
+  static targets = ["form", "view", "inputCategory", "inputDate", "inputTime", "inputLevel", "listButton", "calendarButton", "listView", "calendarView", "tabs"]
 
   updateView() {
     const listButtonActive = this.listButtonTarget.classList.contains("active")
@@ -19,16 +15,21 @@ export default class extends Controller {
         this.viewTarget.outerHTML = data
       })
 
-    // if (this.listButtonTarget.classList.contains("active")) {
-    //   console.log("List")
-    //   this.listViewTarget.classList.add("show", "active")
-    //   this.calendarViewTarget.classList.remove("show", "active")
-    // } else if (this.calendarButtonTarget.classList.contains("active")) {
-    //   console.log("Calendar")
-    //   this.calendarViewTarget.classList.add("show", "active")
-    //   this.listViewTarget.classList.remove("show", "active")
-    //   console.log(this.calendarViewTarget.classList)
-    //   console.log(this.listViewTarget.classList)
-    // }
+    }
+
+    swichTab(event) {
+      if(event.currentTarget == this.calendarButtonTarget) {
+        this.tabsTarget.classList.add('slide')
+        this.listButtonTarget.classList.remove("slide", "active")
+        this.calendarButtonTarget.classList.add('active')
+        this.calendarViewTarget.classList.remove('d-none')
+        this.listViewTarget.classList.add('d-none')
+      } else {
+        this.calendarButtonTarget.classList.remove("slide", "active")
+        this.tabsTarget.classList.remove('slide')
+        event.currentTarget.classList.add('active')
+        this.calendarViewTarget.classList.add('d-none')
+        this.listViewTarget.classList.remove('d-none')
+      }
     }
 }

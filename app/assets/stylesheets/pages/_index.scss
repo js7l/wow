@@ -3,7 +3,7 @@
 @import "show";
 
 .filters {
-  background-color: $dark;
+  background-color: #3b3b3b;
 
   .control-label {
     width: auto;
@@ -23,6 +23,14 @@
   }
 
   .event_level {
+    margin: 0px !important;
+  }
+
+  #event_time {
+    margin: 0px !important;
+  }
+
+  #event_date {
     margin: 0px !important;
   }
 }

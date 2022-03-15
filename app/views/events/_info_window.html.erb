@@ -3,7 +3,7 @@
   <h2><%= studio.name %></h2>
   <p><%= studio.address %></p>
   <div class="overflow-scroll hide-scrollbar">
-  <% event_grouped_by_time = @events.where(studio: studio).group_by { |event| event.time.strftime('%k:%M') } %>
+  <% event_grouped_by_time = @events.where(studio: studio).group_by { |event| event.start_time.strftime('%a, %d %b - %k:%M') } %>
   <% event_grouped_by_time.each do |time, events_per_time| %>
     <div class="card-calendar-group">
       <p class="mb-1"><%= time %></p>
