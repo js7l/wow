@@ -17,7 +17,7 @@
           <h2><%= booking_of_user.event.name %></h2>
           <p>Date, Time: <%= booking_of_user.event.date.strftime("%e %b %Y") %> - <%= booking_of_user.event.time.strftime('%I:%M %p') %></p>
           <p>Status: <%= booking_of_user.status %></p>
-          <h3>Total Price: <strong>IDR <%= number_with_delimiter(booking_of_user.total_price, :delimiter => '.') %></strong></h3>
+          <h3>Total Price: <strong><%= humanized_money_with_symbol(booking_of_user.amount) %></strong></h3>
         </div>
       <% end %>
       <% if booking_of_user.status != "Cancelled" %>
