@@ -54,6 +54,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @studio = @event.studio
     @events = Event.where(studio: @studio)
+    reviews = @studio.events.map {|event| event.reviews }
+    @reviews = reviews.flatten
     @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
     @markers = [{
       lat: @studio.latitude,
