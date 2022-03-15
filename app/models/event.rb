@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   LEVELS = ["Beginner", "Intermediate", "Advanced", "All Levels"]
 
   before_save :add_start_time_end_time_after_creation
+  monetize :price_cents
 
   belongs_to :studio
   has_many :bookings, dependent: :destroy

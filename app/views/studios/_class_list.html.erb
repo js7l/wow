@@ -14,7 +14,7 @@
             <p><%= event.date.strftime("%e %b %Y") %>, <%= event.time.strftime('%k:%M') %></p>
           </div>
           <div class="card-event-price">
-            <strong>IDR <%= number_with_delimiter(event.price, :delimiter => '.') %></strong>
+            <strong><%= humanized_money_with_symbol(event.price) %></strong>
           </div>
         </div>
       <% end %>
