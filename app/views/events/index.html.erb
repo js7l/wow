@@ -1,11 +1,11 @@
 <div data-controller="filter-events">
-  <div class="filters d-flex justify-content-between py-2 px-4">
+  <div class="filters d-flex justify-content-between py-2 px-4" data-controller="filter" data-action="scroll@window->filter#updateFilter">
     <%= simple_form_for :event, url: events_path, method: :post, remote: true, html: { class:"filters d-flex text-white mb-0", data: { filter_events_target: 'form' } } do |f| %>
       <div class="form-group d-flex align-items-center me-4 justify-content-between">
-        <label for="field-1" class="col-sm-3 control-label">Category</label>
+        <%# <label for="field-1" class="col-sm-3 control-label">Category</label> %>
         <div class="d-flex align-items-center">
         <%= f.input :category, :required => false,
-                      collection: Event::CATEGORIES, label: false, prompt: "Select category",
+                      collection: Event::CATEGORIES, label: false, prompt: "Select Category",
                       input_html: { \
                         "data-filter-events-target": "inputCategory", \
                         "data-action": "change->filter-events#updateView" \
@@ -14,10 +14,10 @@
         </div>
       </div>
       <div class="form-group d-flex align-items-center me-4 justify-content-between">
-        <label for="field-1" class="col-sm-3 control-label">Level</label>
+        <%# <label for="field-1" class="col-sm-3 control-label">Level</label> %>
         <div class="d-flex align-items-center">
         <%= f.input :level, :required => false,
-                      collection: Event::LEVELS, label: false, prompt: "Select level",
+                      collection: Event::LEVELS, label: false, prompt: "Select Level",
                       input_html: { \
                         "data-filter-events-target": "inputLevel", \
                         "data-action": "change->filter-events#updateView" \
@@ -26,10 +26,9 @@
         </div>
       </div>
       <div class="form-group d-flex align-items-center me-4 justify-content-between">
-        <label for="field-1" class="col-sm-3 control-label">Date</label>
+        <%# <label for="field-1" class="col-sm-3 control-label">Date</label> %>
         <div class="d-flex align-items-center">
         <%= f.input :date, as: :date, :required => false, html5: true, label: false,
-                    wrapper_html: { class:"d-flex align-items-center me-4" },
                     input_html: { \
                       "data-filter-events-target": "inputDate", \
                       "data-action": "input->filter-events#updateView" \
@@ -38,10 +37,9 @@
         </div>
       </div>
       <div class="form-group d-flex align-items-center me-4 justify-content-between">
-        <label for="field-1" class="col-sm-3 control-label">Time</label>
+        <%# <label for="field-1" class="col-sm-3 control-label">Time</label> %>
         <div class="d-flex align-items-center">
         <%= f.input :time, as: :time, :required => false, html5: true, label: false,
-                    wrapper_html: { class:"d-flex align-items-center me-4" },
                     input_html: {
                       "data-filter-events-target": "inputTime",
                       "data-action": "input->filter-events#updateView",

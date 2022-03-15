@@ -3,10 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["form", "view", "inputCategory", "inputDate", "inputTime", "inputLevel", "listButton", "calendarButton", "listView", "calendarView", "tabs"]
 
-  connect() {
-    console.log("Hello from filter events.js")
-  }
-
   updateView() {
     const listButtonActive = this.listButtonTarget.classList.contains("active")
     const calendarButtonActive = this.calendarButtonTarget.classList.contains("active")
