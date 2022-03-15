@@ -13,11 +13,11 @@
   position: relative;
   margin-left: 45px;
   letter-spacing: 1px;
-  img {
-    height: 100px;
-    width: 200px;
-    object-fit: contain;
-  }
+  // img {
+  //   height: 100px;
+  //   width: 200px;
+  //   object-fit: contain;
+  // }
 }
 
 .card-show-details {
@@ -34,7 +34,7 @@
   height: 350px;
   width: 100%;
   background-size: cover;
-
+  border-radius: 10px;
 }
 .card-image-modal {
   height: 300px;
@@ -66,11 +66,19 @@
 }
 #icon{
   height: 50px;
-  margin-left: -70px;
+
 }
 
 .item-button {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+}
+.map {
+  height: 35vh !important;
+}
+.card-details {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
 }
