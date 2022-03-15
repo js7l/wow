@@ -1,0 +1,13 @@
+<div class="container mb-5">
+<h3>Create a Studio</h3>
+<br>
+<%= simple_form_for @studio do |f| %>
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :email %>
+  <%= f.input :phone_number %>
+  <%= f.input :description %>
+  <%= f.input :avatar %>
+  <%= f.submit class:"btn btn-primary" %>
+<% end %>
+</div>

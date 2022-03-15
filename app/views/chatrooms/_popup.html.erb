@@ -3,11 +3,13 @@
   data-popup-target="popup"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
   <div class="d-flex justify-content-end">
-    <button class="popup" data-action="click->popup#close">X</button>
+    <button class="popup" data-action="click->popup#close">
+      <i class="far fa-window-close"></i>
+    </button>
   </div>
   <div class="messages" data-chatroom-subscription-target="messages">
     <% @chatroom.messages.each do |message| %>
-      <%= render "messages/message", message: message %>
+        <%= render "messages/message", message: message %>
     <% end %>
   </div>
   <%= simple_form_for [@chatroom, @message],

@@ -1,0 +1,21 @@
+.right {
+  float: right;
+	background-color: #ECEFF1;
+	border-bottom-right-radius: 0.125rem;
+  border: 1px solid #9d9fa0;
+}
+
+.message-box-holder {
+  width: 100%;
+  margin: 0 0 15px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+}
+
+.message-sender {
+  font-size: 12px;
+  margin: 0 0 15px;
+  color: #30649c;
+  align-self: flex-start;
+}

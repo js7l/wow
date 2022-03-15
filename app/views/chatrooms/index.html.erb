@@ -1,10 +1,10 @@
-<ul>
+<ul class="mt-5">
   <% @chatrooms.each do |chatroom| %>
-    <%= link_to chatroom_path(chatroom), class: "d-flex justify-content-center" do %>
+    <%= link_to chatroom_path(chatroom) do %>
       <%# If there is at least 1 message, show that message %>
       <% if chatroom.messages.last %>
-      <div class="card-chatrooms-whole">
-        <%= cl_image_tag chatroom.messages.last.user.avatar.key, crop: :fill, height: 40, class:"avatar-small"%>
+        <div class="card-chatrooms-whole d-flex justify-content-center">
+          <%= cl_image_tag chatroom.messages.last.user.avatar.key, crop: :fill, height: 40, class:"avatar-small"%>
           <div class="card-chatroom">
             <div class="w-100">
               <div class="d-flex justify-content-between mt-2">
@@ -13,18 +13,22 @@
               </div>
               <p> <%= truncate(chatroom.messages.last.content) %> </p>
             </div>
+          </div>
+        </div>
         <%# If there are no messages, show below %>
-        <% else %>
-          <%# If logged in user is a client, show studio name %>
-          <% if current_user == chatroom.user %>
-            <p><%= chatroom.studio.name %></p>
-          <%# If logged in user is a studio owner, show client name %>
-          <% else %>
-            <p><%= chatroom.user.first_name %></p>
-          <% end %>
-        <% end %>
-      </div>
+      <% else %>
+        <div class="card-no-avatar d-flex justify-content-center">
+          <div class="card-chatroom">
+            <%# If logged in user is a client, show studio name %>
+            <% if current_user == chatroom.user %>
+              <p><%= chatroom.studio.name %></p>
+            <%# If logged in user is a studio owner, show client name %>
+            <% else %>
+              <p><%= chatroom.user.first_name %></p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
-  </div>
 </ul>

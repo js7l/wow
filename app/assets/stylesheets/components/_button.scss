@@ -7,8 +7,8 @@
 
   &:hover {
     box-shadow: 0 0 3px rgba(0,0,0,0.3);
-    opacity: .9;
     color: white;
+    background-color: #1dd88a;
   }
 }
 
@@ -24,7 +24,7 @@
     border: 1px solid transparent;
     background-color: $primary;
     box-shadow: 0 0 3px rgba(0,0,0,0.3);
-    opacity: .9;
+    // opacity: .9;
     color: white;
   }
 }

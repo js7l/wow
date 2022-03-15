@@ -12,4 +12,24 @@ class StudiosController < ApplicationController
         image_url: helpers.asset_url("wow-logo.png")
       }] # marker for the current studio
   end
+
+  def new
+    @studio = Studio.new
+  end
+
+  def create
+    @studio = Studio.new(studio_params)
+    @studio.user = current_user
+    if @studio.save
+      redirect_to studio_path(@studio)
+    else
+     render 'new'
+    end
+  end
+
+  private
+
+  def studio_params
+    params.require(:studio).permit(:name, :address, :email, :phone_number, :description, :avatar)
+  end
 end

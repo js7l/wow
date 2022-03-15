@@ -1,7 +1,12 @@
 <div class="container" id="studio-show" data-controller="popup">
   <div class="card-wrapper-studio mt-5">
-    <div class="card-studio-image" style="background-image: url('<%= cl_image_path @studio.events.first.photo.key, crop: :fill %>')">
-    </div>
+    <% if @studio.events.first.nil? %>
+      <div class="card-studio-image" style="background-image: url('<%= image_path "gray-checkers.jpg", height: 400, crop: :fill %>')">
+      </div>
+    <% else %>
+      <div class="card-studio-image" style="background-image: url('<%= cl_image_path @studio.events.first.photo.key, height: 400, crop: :fill %>')">
+      </div>
+    <% end %>
     <div class="card-show">
       <h2><%= @studio.name %></h2>
       <div>
@@ -15,11 +20,13 @@
       <p>Email: <%= @studio.email %></p>
       <p>Phone number: <%= @studio.phone_number %></p>
       <% if @chatroom %>
-        <button type="button" class="btn btn-primary" data-action="click->popup#show">
-          Contact Us
+        <button type="button" class="btn" data-action="click->popup#show">
+          <i class="far fa-comments fa-2x"></i>
         </button>
       <% else %>
-        <%= link_to "Contact Us", studio_chatrooms_path(@studio), method: :post, class:"btn btn-primary" %>
+        <%= link_to studio_chatrooms_path(@studio), method: :post, class:"btn" do%>
+          <i class="far fa-comments fa-2x"></i>
+          <% end %>
       <% end %>
     </div>
   </div>
@@ -27,21 +34,19 @@
     <div class="card-schedule">
       <div class="border-0 mb-4">
         <h4>Schedule</h4>
-        <hr class="mt-0">
+        <%# <hr class="mt-0"> %>
       </div>
       <%= render 'class_list', events: @events, events_group: @events_group %>
     </div>
     <div class="card-membership">
       <div class="border-0 mb-4">
         <h4>Membership Plan</h4>
-        <hr class="mt-0">
+        <%# <hr class="mt-0"> %>
       </div>
       <div class="card-membership-package">
         <%= render 'shared/card_package' %>
-        <%= render 'shared/card_package' %>
-        <%= render 'shared/card_package' %>
       </div>
-      <div class="card-map mt-4">
+      <div class="studio-map mt-4">
         <h5>Where to find us</h5>
         <%= render 'shared/map' %>
       </div>

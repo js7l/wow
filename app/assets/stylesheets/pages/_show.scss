@@ -1,17 +1,23 @@
 #studio-show {
   .card-show {
-    margin-left: 50px;
+    margin-left: 25px;
+    margin-top: 10px;
+
     .icon-star {
       color:#eeca28;
     }
 
     .icon-empty {
-      color: transparent;
+      color: #aaa9a6;
     }
   }
 
   .card-wrapper-studio {
     margin-top: 50px;
+
+    h4 {
+      margin-left: 15px;
+    }
   }
 
   .card-schedule {
@@ -26,10 +32,12 @@
   }
 
   .card-studio-image {
-    width: 100%;
-    height: 500px;
+    width: 92%;
+    height: 350px;
     background-size: cover;
-    image-rendering: optimizeQuality;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-left: 45px;
   }
 
   .card-wrapper-studio {
@@ -37,7 +45,13 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .card-map #map {
+  .studio-map #map {
     height: 35vh !important;
+  }
+
+  .btn {
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
   }
 }
