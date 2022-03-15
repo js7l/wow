@@ -165,8 +165,13 @@
     margin: 0;
   }
 
-  .fa {
+  .icon-star {
     color: #eeca28;
+    font-size: 24px;
+  }
+
+  .icon-empty {
+    color: #aaa9a6;
     font-size: 24px;
   }
 }
@@ -302,18 +307,19 @@
 .card-chatrooms-whole {
 
   .card-chatroom {
-    padding: 10px;
+    padding: 15px;
     overflow: hidden;
     height: 80px;
     background: white;
     display: flex;
     border-radius: 10px;
     align-items: center;
-    margin: 15px 30px 15px 0px;
+    margin-left: 15px;
     box-shadow: 0 0 1px rgba(0,0,0,0.5);
     transition: all .2s ease-in-out;
-    margin-left: 15px;
     width: 40vw;
+    margin-bottom: 10px;
+    margin: 15px;
 
     &:hover {
       transform: scale(1.01);
@@ -325,4 +331,28 @@
     margin-top: 25px;
   }
 
+}
+
+.card-no-avatar {
+  margin-left: 40px;
+
+  .card-chatroom {
+    padding: 15px;
+    overflow: hidden;
+    height: 80px;
+    background: white;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    margin-top: 15px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.5);
+    transition: all .2s ease-in-out;
+    width: 40vw;
+    margin: 15px;
+
+    &:hover {
+      transform: scale(1.01);
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+  }
 }

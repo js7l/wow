@@ -11,7 +11,7 @@
             <h2><%= event.name %></h2>
             <p><em>by <%= event.studio.name %></em></p>
             <p><i class="fas fa-user-friends"></i> <%= event.bookings.count %> / <%= event.limit_attendees %></p>
-            <p><%= event.date.strftime("%e %b %Y") %>, <%= event.time.strftime('%k:%M') %></p>
+            <p><%= event.level %> Class</p>
           </div>
           <div class="card-event-price">
             <strong>IDR <%= number_with_delimiter(event.price, :delimiter => '.') %></strong>

@@ -71,7 +71,8 @@ bodyfactory.avatar.attach(io: file, filename: "bodyfactory.jpg")
 bodyfactory.save!
 
 wanderlust = Studio.new({ name: 'Wanderlust Fitness', address: 'Canggu, Bali', email: 'info@wanderlustfitnessvillage.com', phone_number: '+62 (0) 878 6156 8934', user: ray,
-  description: "Bali's premier training facility!" })
+  description: "Wanderlust Fitness Village, home of CrossFit Wanderlust Bali has proudly welcomed and transformed over 15,000 members since first opening their doors in 2016.
+  We invite you to join the EPIC global community known as WANDERLUST!" })
 file = File.open(Rails.root.join("app/assets/images/logo-wanderlust.png"))
 wanderlust.avatar.attach(io: file, filename: "wanderlust.jpg")
 wanderlust.save!
