@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_11_043813) do
+ActiveRecord::Schema.define(version: 2022_03_15_064852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,8 @@ ActiveRecord::Schema.define(version: 2022_03_11_043813) do
   create_table "bookings", force: :cascade do |t|
     t.string "status"
     t.integer "total_attendees"
-    t.integer "total_price"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "checkout_session_id"
     t.bigint "user_id", null: false
     t.bigint "event_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -71,7 +72,6 @@ ActiveRecord::Schema.define(version: 2022_03_11_043813) do
     t.time "time"
     t.integer "duration"
     t.text "description"
-    t.integer "price"
     t.string "instructor"
     t.bigint "studio_id", null: false
     t.integer "limit_attendees"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2022_03_11_043813) do
     t.string "level"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.integer "price_cents", default: 0, null: false
     t.index ["studio_id"], name: "index_events_on_studio_id"
   end
 

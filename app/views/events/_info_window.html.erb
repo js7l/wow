@@ -13,7 +13,7 @@
             <%= cl_image_tag event_per_time.photo.key, width: "50px", height: "50px" %>
             <div>
               <p><strong><%= event_per_time.name %></strong></p>
-              <p>IDR <%= number_with_delimiter(event_per_time.price, :delimiter => '.') %></p>
+              <p><%= humanized_money_with_symbol(event_per_time.price) %></p>
             </div>
           </div>
         <% end %>
