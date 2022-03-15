@@ -23,7 +23,7 @@ export default class extends Controller {
     // mapboxgl: mapboxgl }))
     setTimeout(() => {
       this.map.resize()
-    }, 1500);
+    }, 2000);
   }
 
   #addMarkersToMap() {

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :bookings, only: [:show, :edit, :update] do
     resources :reviews, only: [:new, :create]
+    resources :payments, only: :new
   end
 
   resources :chatrooms, only: [:index, :show ] do
@@ -22,4 +23,5 @@ Rails.application.routes.draw do
   end
 
   get '/dashboard', to: 'pages#dashboard'
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

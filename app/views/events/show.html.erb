@@ -23,7 +23,7 @@
           <p>  <%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
           <p>  <%= @event.duration %> minutes</p>
           <p>  <%= @event.bookings.count %> / <%= @event.limit_attendees %> Booked</p>
-          <p>  <strong>IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %></strong></p>
+          <p>  <%= humanized_money_with_symbol(@event.price) %></p>
       </div>
       </div>
           <div class="item-button">
@@ -64,10 +64,10 @@
                       <p><i class="fas fa-money-bill"> </i></p>
                     </div>
                     <div class="p-2">
-                      <p>  <%= @event.studio.address %></p>
+                      <p> <%= @event.studio.address %></p>
                       <p> <%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
-                      <p>  <%= @event.bookings.count %> / <%= @event.limit_attendees %> Booked </p>
-                      <p>  IDR <%= number_with_delimiter(@event.price, :delimiter => '.') %>
+                      <p> <%= @event.bookings.count %> / <%= @event.limit_attendees %> Booked</p>
+                      <p> <%= humanized_money_with_symbol(@event.price) %></p>
                     </div>
                   </div>
                 </div>

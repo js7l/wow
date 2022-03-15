@@ -41,7 +41,7 @@
                       <h2><%= booking_of_user.event.name %></h2>
                       <p>Date, Time: <%= booking_of_user.event.date.strftime("%e %b %Y") %> - <%= booking_of_user.event.time.strftime('%I:%M %p') %></p>
                       <p>Status: <%= booking_of_user.status %></p>
-                      <h3>Total Price: <strong>IDR <%= number_with_delimiter(booking_of_user.total_price, :delimiter => '.') %></strong></h3>
+                      <h3>Total Price: <strong><%= humanized_money_with_symbol(booking_of_user.amount) %></strong></h3>
                       </div>
                   </div>
                   <div class="modal-footer">
@@ -87,14 +87,15 @@
       <% end %>
     </div>
   <div class="my-4">
-  <h3>My Favorite Classes</h3>
-   <% @favorited_events.each do |favorited_event| %>
-    <div class="card-product mt-3 d-flex justify-content-between">
-      <%= cl_image_tag favorited_event.photo.key %>
-      <div class="card-product-infos">
-        <h2><%= favorited_event.name %></h2>
-        <p>Date, Time: <%= favorited_event.date.strftime("%e %b %Y") %> - <%= favorited_event.time.strftime('%I:%M %p') %></p>
+    <h3>My Favorite Classes</h3>
+    <% @favorited_events.each do |favorited_event| %>
+      <div class="card-product mt-3 d-flex justify-content-between">
+        <%= cl_image_tag favorited_event.photo.key %>
+        <div class="card-product-infos">
+          <h2><%= favorited_event.name %></h2>
+          <p>Date, Time: <%= favorited_event.date.strftime("%e %b %Y") %> - <%= favorited_event.time.strftime('%I:%M %p') %></p>
+        </div>
       </div>
-    </div>
     <% end %>
+  </div>
 </div>
