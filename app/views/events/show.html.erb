@@ -41,7 +41,7 @@
       </div>
         <div class="me-2">
           <p>  <%= @event.duration %> minutes</p>
-          <p>  <%= @event.bookings.count %> / <%= @event.limit_attendees %> Booked</p>
+          <p>  <%= @event.bookings.where.not(status: "Cancelled").count %> / <%= @event.limit_attendees %> Booked</p>
         </div>
       </div>
       </div>
