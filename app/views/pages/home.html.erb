@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path "homepage.jpg" %>');">
+<div class="banner position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path "homepage.jpg" %>');">
   <div class="container d-flex flex-column align-items-center">
     <%= image_tag "wow-logo.png", class:"logo" %>
     <h1 class="text-center">First, find your sport.</h1>
@@ -12,8 +12,8 @@
         <button class="btn btn-primary">Search</button>
       </div>
     <% end %>
-    <div>
-    <a href="#scroll"><i class="fas fa-angle-down fa-lg"></i></a>
+    <div class="position-absolute bottom-0 start-50 translate-middle-x ">
+      <a href="#scroll"><i class="fas fa-angle-down text-white fa-2x"></i></a>
     </div>
   </div>
 </div>

@@ -41,13 +41,19 @@
       </div>
         <div class="me-2">
           <p>  <%= @event.duration %> minutes</p>
-          <p>  <%= @event.bookings.count %> / <%= @event.limit_attendees %> Booked</p>
+          <p>  <%= @event.bookings.where.not(status: "Cancelled").count %> / <%= @event.limit_attendees %> Booked</p>
         </div>
       </div>
       </div>
           <div class="item-button">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Book Now
+          <button type="button" class="btn btn-primary <%= "disabled" if @event.limit_attendees <= @event.bookings.where.not(status: "Cancelled").count || (current_user && current_user.bookings.pluck(:event_id).include?(@event.id)) %>" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <% if current_user && current_user.bookings.where.not(status: "Cancelled").pluck(:event_id).include?(@event.id) %>
+              Booked
+            <% elsif @event.limit_attendees <= @event.bookings.where.not(status: "Cancelled").count %>
+              Class Full
+            <% else %>
+              Book Now
+            <% end %>
           </button>
             <% if user_signed_in? %>
               <% if current_user.favorited?(@event) %>

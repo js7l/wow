@@ -10,6 +10,10 @@
     color: white;
     background-color: #1dd88a;
   }
+
+  &:disabled {
+    color: white;
+  }
 }
 
 .btn-secondary {

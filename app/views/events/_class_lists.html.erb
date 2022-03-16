@@ -16,6 +16,18 @@
               <p><%= event.level %> Class</p>
             </div>
             <div class="card-event-price">
+              <% if current_user && current_user.bookings.where.not(status: "Cancelled").pluck(:event_id).include?(event.id) %>
+                <div class="card-event-status border-success bg-success">
+                  Booked
+                </div>
+              <% elsif event.limit_attendees <= event.bookings.where.not(status: "Cancelled").count %>
+                <div class="card-event-status border-info bg-info">
+                  Class Full
+                </div>
+              <% else %>
+                <div>
+                </div>
+              <% end %>
               <strong><%= humanized_money_with_symbol(event.price) %></strong>
             </div>
           </div>
