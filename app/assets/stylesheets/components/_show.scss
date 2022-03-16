@@ -2,9 +2,11 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  height: 400px;
   &.bottom {
     height: 90vh;
   }
+
 }
 
 .card-show {
@@ -22,7 +24,6 @@
     line-height: 10px;
 
   }
-
 }
 
 .card-show-details {
@@ -33,7 +34,6 @@
     width: 200px;
     object-fit: contain;
   }
-
 }
 .card-image {
   height: 350px;
@@ -86,4 +86,14 @@
   height: 300px;
   display: flex;
   flex-direction: column;
+}
+.item-value {
+  margin-left: 40px;
+}
+.icon-star {
+  color:#eeca28;
+}
+
+.icon-empty {
+  color: #aaa9a6;
 }
