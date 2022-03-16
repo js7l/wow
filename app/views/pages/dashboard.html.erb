@@ -24,7 +24,7 @@
             <div class="card-product-right">
               <% if booking_of_user.status == "Pending" %>
                 <p class="text-secondary">
-              <% elsif booking_of_user.status == "Paid" || booking_of_user.status == "Confirmed" %>
+              <% elsif booking_of_user.status == "Paid" || booking_of_user.status == "Cash" %>
                 <p class="text-success">
               <% elsif booking_of_user.status == "Cancelled" %>
                 <p class="text-warning">

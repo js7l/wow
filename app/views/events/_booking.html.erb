@@ -26,8 +26,8 @@
           </div>
         </div>
       <div class="modal-footer">
-        <%= link_to "Pay Now", event_bookings_path(@event), method: :post, class: "btn btn-primary" %>
-        <%= link_to "Pay Later", event_bookings_path(@event), method: :post, class: "btn btn-secondary" %>
+        <%= link_to "Pay Now", event_bookings_path(@event, paynow: true), method: :post, class: "btn btn-primary w-100" %>
+        <%= link_to "Pay Later", event_bookings_path(@event, paylater: true), method: :post, class: "btn btn-secondary w-100" %>
       </div>
     </div>
   </div>
