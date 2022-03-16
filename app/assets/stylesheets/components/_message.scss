@@ -1,6 +1,16 @@
+.chat-messages {
+  border-top: 1px solid rgba(0, 0, 0, .05);
+  padding: 10px;
+  overflow: auto;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  flex: 1;
+}
+
 .message-box-holder {
   width: 100%;
-  margin: 0 0 15px;
+  margin: 0 0 10px;
   display: flex;
   flex-flow: column;
   align-items: flex-end;
@@ -8,7 +18,7 @@
 
 .message-sender {
   font-size: 12px;
-  margin: 0 0 15px;
+  margin: 0 0 10px;
   color: #30649c;
   align-self: flex-start;
 }
