@@ -1,0 +1,36 @@
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-black h-50">
+              <%= link_to root_path, class: "navbar-brand" do %>
+                <%= image_tag "wow-logo.png", id:"icon" %>
+              <% end %>
+              <h5 class="modal-title text-white" id="exampleModalLabel"><%= @event.name %></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <div class="card-image-modal" style="background-image: url( <%= cl_image_path @event.photo.key, height: 400, crop: :fill%>)"></div>
+              <div class="modal-card lh-sm">
+                  <div class="item-details d-flex justify-content-center mt-3">
+                    <div class="p-2">
+                      <p><i class="fas fa-location-arrow"></i> </p>
+                      <p><i class="fas fa-calendar-alt"> </i></p>
+                      <p><i class="fas fa-user-friends"> </i> </p>
+                      <p><i class="fas fa-money-bill"> </i></p>
+                    </div>
+                    <div class="p-2">
+                      <p> <%= @event.studio.address %></p>
+                      <p> <%= @event.date.strftime("%e %b %Y") %>, <%= @event.time.strftime('%I:%M %p') %></p>
+                      <p> <%= @event.bookings.count %> / <%= @event.limit_attendees %> Booked</p>
+                      <p> <%= humanized_money_with_symbol(@event.price) %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <%= link_to "Book Now",event_bookings_path(@event), method: :post, class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>

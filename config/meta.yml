@@ -1,5 +1,5 @@
 meta_product_name: "WOW"
 meta_title: "WOW - First, find your sports"
 meta_description: "Find your favorite sports"
-meta_image: "homepage.jpg" # should exist in `app/assets/images/`
+meta_image: "og_image.jpg" # should exist in `app/assets/images/`
 twitter_account: "@wow_twitter_account"   # required for Twitter Cards
