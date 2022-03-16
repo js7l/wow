@@ -1,5 +1,4 @@
-<div class="container d-flex">
-  <div class="w-50">
+<div class="container">
     <h2>Dashboard</h2>
     <div class="d-flex mt-3">
       <%= cl_image_tag current_user.avatar.key, class: "avatar-large" %>
@@ -8,6 +7,8 @@
         <p class="m-0"><%= current_user.email %></p>
       </div>
     </div>
+  <div class="card-dashboard d-flex">
+  <div class="w-50">
     <div class="my-4">
       <h3>My Bookings</h3>
       <% @bookings_of_user.each do |booking_of_user| %>
@@ -114,8 +115,13 @@
     </div>
   </div >
   <%# MAP %>
-  <div class="w-50 p-5">
-    <%= render 'shared/map' %>
+  <div class="card-dashboard-map w-50">
+    <div class="my-4">
+    <h3>How To Get There?</h3>
+      <div class="mt-3">
+        <%= render 'shared/map' %>
+      </div>
+    </div>
   </div>
-
+  </div>
 </div>
