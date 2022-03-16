@@ -23,6 +23,10 @@
     transition: opacity 0.3s ease;
     width: 380px;
   }
+
+  .avatar-small {
+    cursor: pointer;
+  }
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -35,6 +39,11 @@
 
 .nav-link {
   color: $light !important;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    color: $primary !important;
+  }
 }
 
 .navbar-home {
