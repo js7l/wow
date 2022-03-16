@@ -5,7 +5,8 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    markers: Array,
+    avatar: String,
   }
 
   connect() {
@@ -22,6 +23,9 @@ export default class extends Controller {
     // this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
     // mapboxgl: mapboxgl }))
     setTimeout(() => {
+      if (location.pathname === "/dashboard") {
+        this.#getUserCoords()
+      }
       this.map.resize()
     }, 2000);
   }
@@ -49,7 +53,143 @@ export default class extends Controller {
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 2000 })
+    if (this.markersValue.length > 0) {
+
+      this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
+      this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 2000 })
+    }
+  }
+
+  #getDirection(start) {
+    this.getRoute(start);
+    console.log(this.avatarValue)
+    this.map.loadImage(this.avatarValue, (err, img) => {
+      this.map.addImage("human", img)
+    })
+    // Add starting point to the map
+    this.map.addLayer({
+      id: 'point',
+      type: 'symbol',
+      layout: {
+        "icon-image": "human",
+        "icon-size": 0.028,
+      },
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'Point',
+                coordinates: start
+              }
+            }
+          ]
+        }
+      }
+    });
+    // Add end point to map
+    const coords = [this.markersValue[0].lng, this.markersValue[0].lat]
+    const end = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Point',
+            coordinates: coords
+          }
+        }
+      ]
+    };
+    if (this.map.getLayer('end')) {
+      this.map.getSource('end').setData(end);
+    } else {
+      this.map.addLayer({
+        id: 'end',
+        type: 'circle',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'Point',
+                  coordinates: coords
+                }
+              }
+            ]
+          }
+        },
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#f30'
+        }
+      });
+    }
+    this.getRoute(coords);
+  }
+
+  #getUserCoords() {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const start = ([pos.coords.longitude, pos.coords.latitude])
+      this.#getDirection(start)
+      console.log("HI")
+    })
+  }
+
+  // create a function to make a directions request
+  async getRoute(end) {
+    // make a directions request using cycling profile
+    // an arbitrary start will always be the same
+    // only the end or destination will change
+    const start = [115.130468, -8.654085];
+    const query = await fetch(
+      `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+      { method: 'GET' }
+    );
+    const json = await query.json();
+    const data = json.routes[0];
+    const route = data.geometry.coordinates;
+    const geojson = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: route
+      }
+    };
+    // if the route already exists on the map, we'll reset it using setData
+    if (this.map.getSource('route')) {
+      this.map.getSource('route').setData(geojson);
+    }
+    // otherwise, we'll make a new request
+    else {
+      this.map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: {
+          type: 'geojson',
+          data: geojson
+        },
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': '#3887be',
+          'line-width': 5,
+          'line-opacity': 0.75
+        }
+      });
+    }
+    // add turn instructions here at the end
   }
 }

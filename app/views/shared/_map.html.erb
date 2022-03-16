@@ -1,5 +1,6 @@
 <div id="map" style="width: 100%; height: 100vh;" class="<%= 'map-show' if action_name == 'show' && controller_name == "studios" %>"
   data-controller="mapbox"
   data-mapbox-markers-value="<%= @markers.to_json %>"
-  data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  data-mapbox-avatar-value="<%= user_signed_in? ? current_user.avatar.service_url(crop: :fill, radius: :max) : "" %>">
   </div>
