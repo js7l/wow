@@ -8,6 +8,12 @@ class ChatroomsController < ApplicationController
   def show
     @chatroom = Chatroom.find(params[:id])
     @message = Message.new
+    @unread = @chatroom.messages.select { |m| m.user != current_user && m.read == false }
+    @unread.each do |msg|
+      msg.read = true
+      msg.save!
+    end
+
   end
 
   def create

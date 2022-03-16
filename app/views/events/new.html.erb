@@ -1,1 +1,21 @@
-<p>Create you classes here</p>
+<div class="container col-8 mb-5">
+  <h3>Create your class here</h3>
+  <br>
+  <%= simple_form_for @event do |f| %>
+    <%= f.input :name %>
+    <%= f.input :category, :required => false,
+                collection: Event::CATEGORIES %>
+    <%= f.input :date %>
+    <%= f.input :time %>
+    <%= f.input :duration %>
+    <%= f.input :description %>
+    <%= f.input :instructor %>
+    <%= f.input :limit_attendees %>
+    <%= f.input :level, collection: Event::LEVELS %>
+    <%= f.input :start_time %>
+    <%= f.input :end_time %>
+    <%= f.input :price_cents %>
+    <%= f.input :photo %>
+    <%= f.submit class:"btn btn-primary" %>
+  <% end %>
+</div>
