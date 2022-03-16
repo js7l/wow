@@ -2,7 +2,7 @@
 <% content_for :meta_description, @event.description %>
 <% content_for :meta_image, cl_image_path(@event.photo.key) %>
 <div class="container pb-5" data-controller="popup">
-  <div class="card-wrapper  align-items-end mt-5 mb-5">
+  <div class="card-wrapper align-items-end mt-5 mb-5">
     <div class="card-show h-100">
       <div class="card-image h-100" style="background-image: url( <%= cl_image_path @event.photo.key, height: 400, crop: :fill%>)"></div>
     </div>

@@ -32,12 +32,12 @@
               <% end %>
                 <%= booking_of_user.status %>
               </p>
-              <% if booking_of_user.status != "Cancelled" %>
               <div class="card-product-right-buttons">
-                <% if (booking_of_user.event.date >= Date.today() && booking_of_user.event.time >= Time.now)%>
+              <% if booking_of_user.status != "Cancelled" %>
+                <% if (booking_of_user.event.start_time >= Time.now())%>
                   <!-- Button Cancel Trigger Modal -->
                   <div>
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       Cancel
                     </button>
                     <!-- Modal -->
@@ -69,32 +69,35 @@
                   </div>
                   <!-- end of modal -->
                   <%# ---------- %>
-                  <div class="ms-2">
                 <% else %>
-                  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= booking_of_user.id%>" data-bs-whatever="@getbootstrap">Review</button>
-                <% end %>
-                <div class="modal fade" id="exampleModal-<%= booking_of_user.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Type your review for <%= booking_of_user.event.name %> </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <%= simple_form_for [booking_of_user, @review], html: { id: "review-booking-#{booking_of_user.id}" } do |f| %>
-                          <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: { class: "review-book-form" } %>
-                          <%= f.input :content, placeholder: "Min 20 character" %>
-                        <% end %>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" form="review-booking-<%= booking_of_user.id %>">Send Review</button>
+                  <div class="ms-2">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= booking_of_user.id%>" data-bs-whatever="@getbootstrap">
+                      Review
+                    </button>
+                    <div class="modal fade" id="exampleModal-<%= booking_of_user.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Type your review for <%= booking_of_user.event.name %> </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <%= simple_form_for [booking_of_user, @review], html: { id: "review-booking-#{booking_of_user.id}" } do |f| %>
+                              <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: { class: "review-book-form" } %>
+                              <%= f.input :content, placeholder: "Min 20 character" %>
+                            <% end %>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" form="review-booking-<%= booking_of_user.id %>">Send Review</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                <% end %>
               <% end %>
+              </div>
             </div>
           </div>
         </div>
