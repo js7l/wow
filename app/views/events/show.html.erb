@@ -1,6 +1,6 @@
 <% content_for :meta_title, "#{@event.name} is on #{DEFAULT_META["meta_product_name"]}" %>
 <% content_for :meta_description, @event.description %>
-<% content_for :meta_image, cl_image_path(@event.photo.path) %>
+<% content_for :meta_image, cl_image_path(@event.photo.key) %>
 <div class="container pb-5" data-controller="popup">
   <div class="card-wrapper  align-items-end mt-5 mb-5">
     <div class="card-show h-100">
