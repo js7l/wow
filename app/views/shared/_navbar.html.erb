@@ -5,7 +5,7 @@
     <% end %>
 
     <%= form_tag events_path, method: :get, class: action_name == "home" ? "d-none" : "" do %>
-      <div class="row g-0 position-relative">
+      <div class="row g-0" id="search">
         <div class="col-md-12">
           <%= text_field_tag :query,
             params[:query],
@@ -13,7 +13,7 @@
             placeholder: "Find a class"
           %>
         </div>
-        <button class="btn-search position-absolute end-0 right-0"><i class="fas fa-search fa-2xs"></i></button>
+        <button class="btn-search"><i class="fas fa-search fa-2xs"></i></button>
       </div>
     <% end %>
 
@@ -25,7 +25,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Create a Studio", new_studio_path, class: "nav-link" %>
