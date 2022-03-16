@@ -261,6 +261,12 @@
     object-fit: cover;
   }
 
+  .card-product-body {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
   .card-product-infos {
     padding: 16px;
     flex-grow: 1;
@@ -274,7 +280,6 @@
 }
 
 .card-product-right {
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

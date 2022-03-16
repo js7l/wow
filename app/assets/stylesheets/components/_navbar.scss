@@ -3,21 +3,6 @@
   background-color: black;
   transition: 0.5s background-color ease;
 
-  .btn-search {
-    background-color: transparent;
-    height: 40px;
-    width: 40px;
-    border: none;
-    transition: opacity 0.3s ease;
-    border-radius: 50%;
-    color: $primary;
-
-    &:hover {
-      border: none;
-      color: $primary;
-    }
-  }
-
   .form-control {
     color: #4A4A4A;
     transition: opacity 0.3s ease;
@@ -26,6 +11,24 @@
 
   .avatar-small {
     cursor: pointer;
+  }
+}
+
+#search {
+  position: relative;
+  margin-left: 14%;
+
+  .btn-search {
+    background-color: transparent;
+    height: 40px;
+    width: 40px;
+    border: none;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+    color: $primary;
+    position: absolute;
+    top: 0;
+    right: -14%;
   }
 }
 
