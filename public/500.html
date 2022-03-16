@@ -32,12 +32,6 @@
     font-family: 'Avenir-Next',Avenir,Helvetica,sans-serif;
     color: #fff;
     background-color: none;
-    z-index: 2;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    margin-top: 400px;
   }
 
   h1 {
@@ -46,9 +40,7 @@
 
   h2 {
     margin-top: 0;
-    max-width: 700px;
-    font-size: 30px;
-    text-align: center;
+    font-size: 50px;
   }
 
   p {
@@ -59,6 +51,12 @@
 
   a {
     color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-shadow: 0 0 5px #e2e2e2e2;
   }
 
 </style>
@@ -68,11 +66,9 @@
 <!-- This file lives in public/404.html -->
   <div class="whole">
     <div class="container">
-      <div class="row">
-        <h1>500</h1>
-        <h2>Server Error</h2>
-        <p>Please head back to the <a href="/">homepage</a>.</p>
-      </div>
+      <h1>500</h1>
+      <h2>Server Error</h2>
+      <p>Please head back to the <a href="/">homepage</a>.</p>
     </div>
   </div>
 </body>
