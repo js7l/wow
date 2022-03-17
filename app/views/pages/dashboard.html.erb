@@ -111,9 +111,11 @@
         <div class="card-product mt-3 d-flex justify-content-between">
           <%= cl_image_tag favorited_event.photo.key %>
           <div class="card-product-infos">
+            <%= link_to event_path(favorited_event) do %>
             <h2><%= favorited_event.name %></h2>
             <p>Date, Time: <%= favorited_event.date.strftime("%e %b %Y") %> - <%= favorited_event.time.strftime('%I:%M %p') %></p>
             <h3>Total Price: <strong><%= humanized_money_with_symbol(favorited_event.price) %></strong></h3>
+            <% end %>
           </div>
         </div>
       <% end %>
