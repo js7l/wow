@@ -27,7 +27,10 @@ export default class extends Controller {
       if (location.pathname === "/dashboard") {
         this.#getUserCoords()
         this.#handleClick()
+<<<<<<< HEAD
         // this.#getInstructions()
+=======
+>>>>>>> f87d615da94b3669049cc1b5dce0a80350b546ca
       }
       this.map.resize()
     }, 2000);
@@ -66,10 +69,10 @@ export default class extends Controller {
   }
 
   #getDirection(start) {
-    this.getRoute(start);
     this.map.loadImage(this.avatarValue, (err, img) => {
       this.map.addImage("human", img)
     })
+    this.getRoute(start);
     // Add starting point to the map
     this.map.addLayer({
       id: 'point',
@@ -196,6 +199,18 @@ export default class extends Controller {
       this.getRoute(coords);
     })
   }
+  #getInstructions(data) {
+    const instructions = document.getElementById('instructions');
+    const steps = data.legs[0].steps;
+
+    let tripInstructions = '';
+    for (const step of steps) {
+      tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+    }
+    instructions.innerHTML = `<p><strong>Trip Duration: ${Math.floor(
+      data.duration / 60
+    )} mins 🚗 </strong></p><ol>${tripInstructions}</ol>`;
+  }
 
   // create a function to make a directions request
   async getRoute(end) {
@@ -204,7 +219,7 @@ export default class extends Controller {
     // only the end or destination will change
     const start = [115.130468, -8.654085];
     const query = await fetch(
-      `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+      `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
       { method: 'GET' }
     );
     const json = await query.json();
@@ -243,5 +258,6 @@ export default class extends Controller {
       });
     }
     // add turn instructions here at the end
+    this.#getInstructions(data)
   }
 }

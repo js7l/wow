@@ -103,14 +103,16 @@
   color: #aaa9a6;
 }
 
-// #instructions {
-//   position: absolute;
-//   margin: 20px;
-//   width: 25%;
-//   top: 0;
-//   bottom: 20%;
-//   padding: 20px;
-//   background-color: #fff;
-//   overflow-y: scroll;
-//   font-family: sans-serif;
-// }
+#instructions {
+  position: absolute;
+  margin: 20px;
+  width: 25%;
+  height: 50%;
+  top: 0;
+  bottom: 20%;
+  padding: 20px;
+  background-color: #ffffffb8;
+  overflow-y: scroll;
+  font-family: "Montserrat";
+  border-radius: 10px;
+}
