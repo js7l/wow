@@ -45,7 +45,6 @@ class EventsController < ApplicationController
       }
     end
 
-    #simple calender gem
     respond_to do |format|
       format.html # Follow regular flow of Rails
       format.text { render partial: 'class_view', locals: { events: @events, events_group: @events_group }, formats: [:html] }
