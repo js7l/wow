@@ -450,14 +450,12 @@
 }
 .card-dashboard-map {
   margin-left: 20px;
+  #map{
+    border-radius: 10px;
+  }
 
-  #map {
-    width: 75vw;
-    display: flex;
-    object-fit: cover;
-    height: 100vh;
-    position: sticky;
-    top: 0;
+  .card-map{
+    border-radius: 10px;
   }
 }
 
