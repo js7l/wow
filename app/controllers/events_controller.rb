@@ -7,11 +7,11 @@ class EventsController < ApplicationController
     @categories = Event::CATEGORIES
 
     if params[:query].present?
-      @events = Event.search_by(params[:query]).order(:date, :time)
+      @events = Event.search_by(params[:query])
     elsif params[:category].present?
-      @events = Event.where(category: params[:category]).order(:date, :time)
+      @events = Event.where(category: params[:category])
     else
-      @events = Event.order(:date, :time)
+      @events = Event
     end
 
     if params[:date].present?
@@ -19,16 +19,20 @@ class EventsController < ApplicationController
     end
 
     if params[:time].present?
-      @events = @events.where(time: params[:time])
+      @events = @events.where(time: params[:time].to_time)
     end
 
     if params[:level].present?
       @events = @events.where(level: params[:level])
     end
 
+    if params[:start_date].present?
+      @events = @events.where('date > ?', params[:start_date])
+    end
+
     @events = @events.where('start_time > ?', DateTime.now)
 
-    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
+    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }.sort_by { |group| group[0] }
     @studios = Studio.where(id: @events.pluck(:studio_id))
     # the `geocoded` scope filters only studios with coordinates (latitude & longitude)
 
@@ -41,9 +45,6 @@ class EventsController < ApplicationController
       }
     end
 
-    #simple calender gem
-    start_date = params.fetch(:start_date, Date.today).to_date
-    @meetings = Event.where(start_time: start_date..(start_date + 8.day))
     respond_to do |format|
       format.html # Follow regular flow of Rails
       format.text { render partial: 'class_view', locals: { events: @events, events_group: @events_group }, formats: [:html] }
@@ -56,7 +57,7 @@ class EventsController < ApplicationController
     @events = Event.where(studio: @studio)
     reviews = @studio.events.map {|event| event.reviews }
     @reviews = reviews.flatten
-    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
+    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }.sort_by { |group| group[0] }
     @markers = [{
       lat: @studio.latitude,
       lng: @studio.longitude,

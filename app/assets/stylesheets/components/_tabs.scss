@@ -48,5 +48,15 @@
 	user-select: none;
 	&.active {
 		color: #fff;
+
+    // i {
+    //   background-color: $primary
+    // }
+
+    // &:not(.active) {
+    //   i {
+    //     background-color: #fff;
+    //   }
+    // }
 	}
 }
