@@ -43,7 +43,8 @@ class EventsController < ApplicationController
 
     #simple calender gem
     start_date = params.fetch(:start_date, Date.today).to_date
-    @meetings = Event.where(start_time: start_date..(start_date + 8.day))
+    # @meetings = Meeting.where(starts_at: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
+    # @meetings = Event.where(start_time: start_date..(start_date + 8.day))
     respond_to do |format|
       format.html # Follow regular flow of Rails
       format.text { render partial: 'class_view', locals: { events: @events, events_group: @events_group }, formats: [:html] }
