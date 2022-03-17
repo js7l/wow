@@ -11,6 +11,7 @@ export default class extends Controller {
 
   connect() {
     mapboxgl.accessToken = this.apiKeyValue;
+    this.markers = []
 
     this.map = new mapboxgl.Map({
       container: this.element,
@@ -25,6 +26,8 @@ export default class extends Controller {
     setTimeout(() => {
       if (location.pathname === "/dashboard") {
         this.#getUserCoords()
+        this.#handleClick()
+        this.#getInstructions()
       }
       this.map.resize()
     }, 2000);
@@ -44,10 +47,12 @@ export default class extends Controller {
       customMarker.style.height = "25px"
 
       // Pass the element as an argument to the new marker
-      new mapboxgl.Marker(customMarker)
+      const mapMarker = new mapboxgl.Marker(customMarker)
         .setLngLat([marker.lng, marker.lat])
         .setPopup(popup)
         .addTo(this.map)
+
+      this.markers.push(mapMarker)
     });
   }
 
@@ -62,7 +67,6 @@ export default class extends Controller {
 
   #getDirection(start) {
     this.getRoute(start);
-    console.log(this.avatarValue)
     this.map.loadImage(this.avatarValue, (err, img) => {
       this.map.addImage("human", img)
     })
@@ -141,7 +145,55 @@ export default class extends Controller {
     navigator.geolocation.getCurrentPosition((pos) => {
       const start = ([pos.coords.longitude, pos.coords.latitude])
       this.#getDirection(start)
-      console.log("HI")
+    })
+  }
+
+  #handleClick() {
+    this.map.on('click', event => {
+      const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
+      const end = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'Point',
+              coordinates: coords
+            }
+          }
+        ]
+      };
+
+      if (this.map.getLayer('end')) {
+        this.map.getSource('end').setData(end);
+      } else {
+        this.map.addLayer({
+          id: 'end',
+          type: 'circle',
+          source: {
+            type: 'geojson',
+            data: {
+              type: 'FeatureCollection',
+              features: [
+                {
+                  type: 'Feature',
+                  properties: {},
+                  geometry: {
+                    type: 'Point',
+                    coordinates: coords
+                  }
+                }
+              ]
+            }
+          },
+          paint: {
+            'circle-radius': 10,
+            'circle-color': '#f30'
+          }
+        });
+      }
+      this.getRoute(coords);
     })
   }
 

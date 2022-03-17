@@ -155,12 +155,11 @@
 .card-review {
   padding: 18px;
   overflow: hidden;
-  background: white;
+  background: rgb(189, 185, 185);
   border-radius: 10px;
   position: relative;
   height: 88px;
   // box-shadow: 0 0 1px rgba(0,0,0,0.2);
-
 
   h2 {
     font-size: 18px;
@@ -459,20 +458,5 @@
     height: 100vh;
     position: sticky;
     top: 0;
-  }
-  .mapboxgl-popup {
-    max-width: 200px;
-  }
-
-  .mapboxgl-popup-content {
-    text-align: center;
-    font-family: "Open Sans", sans-serif;
-  }
-
-  .mapboxgl-ctrl-geocoder {
-    max-width: none;
-    width: 100%;
-    border: 1px solid lightgrey;
-    box-shadow: none;
   }
 }
