@@ -17,19 +17,21 @@ export default class extends Controller {
 
     }
 
-    swichTab(event) {
-      if(event.currentTarget == this.calendarButtonTarget) {
-        this.tabsTarget.classList.add('slide')
-        this.listButtonTarget.classList.remove("slide", "active")
-        this.calendarButtonTarget.classList.add('active')
-        this.calendarViewTarget.classList.remove('d-none')
-        this.listViewTarget.classList.add('d-none')
-      } else {
-        this.calendarButtonTarget.classList.remove("slide", "active")
-        this.tabsTarget.classList.remove('slide')
-        event.currentTarget.classList.add('active')
-        this.calendarViewTarget.classList.add('d-none')
-        this.listViewTarget.classList.remove('d-none')
-      }
+  swichTab(event) {
+    if(event.currentTarget == this.calendarButtonTarget) {
+      this.tabsTarget.classList.add('slide')
+      this.listButtonTarget.classList.remove("slide", "active")
+      this.calendarButtonTarget.classList.add('active')
+      this.calendarViewTarget.classList.remove('d-none')
+      this.listViewTarget.classList.add('d-none')
+    } else {
+      this.calendarButtonTarget.classList.remove("slide", "active")
+      this.tabsTarget.classList.remove('slide')
+      event.currentTarget.classList.add('active')
+      this.calendarViewTarget.classList.add('d-none')
+      this.listViewTarget.classList.remove('d-none')
     }
+
+    this.updateView()
+  }
 }

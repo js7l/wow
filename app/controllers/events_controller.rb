@@ -7,11 +7,11 @@ class EventsController < ApplicationController
     @categories = Event::CATEGORIES
 
     if params[:query].present?
-      @events = Event.search_by(params[:query]).order(:date, :time)
+      @events = Event.search_by(params[:query])
     elsif params[:category].present?
-      @events = Event.where(category: params[:category]).order(:date, :time)
+      @events = Event.where(category: params[:category])
     else
-      @events = Event.order(:date, :time)
+      @events = Event
     end
 
     if params[:date].present?
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
 
     @events = @events.where('start_time > ?', DateTime.now)
 
-    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
+    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }.sort_by { |group| group[0] }
     @studios = Studio.where(id: @events.pluck(:studio_id))
     # the `geocoded` scope filters only studios with coordinates (latitude & longitude)
 

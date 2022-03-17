@@ -1,9 +1,9 @@
 <div class="simple-calendar">
-  <% beginning = Date.today() %>
-  <% ending = Date.today() + 6.day %>
+  <% beginning = params[:start_date] ? params[:start_date].to_date : Date.today() %>
+  <% ending = beginning + 6.day %>
   <% date_range = (beginning..ending).to_a %>
-  <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: '<<'), calendar.url_for_previous_view %>
+  <div class="calendar-heading py-2 text-end">
+    <%= link_to t('simple_calendar.previous', default: '<<'), url_for(params.permit!.merge(start_date: (beginning - 7.days).iso8601)) %>
     <% if calendar.number_of_weeks == 1 %>
       <span class="calendar-title"><%= t('simple_calendar.week', default: 'Week') %> <%= calendar.week_number %></span>
     <% else %>
