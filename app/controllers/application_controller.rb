@@ -13,4 +13,13 @@ class ApplicationController < ActionController::Base
   def default_url_options
     { host: ENV["DOMAIN"] || "localhost:3000" }
   end
+
+  # def date_range
+  #   if params[:start_date]
+  #     initial_start = params[:start_date].to_date
+  #     initial_start..(initial_start + 7.days)
+  #   else
+  #     Date.today..(Date.today + 7.days)
+  #   end
+  # end
 end

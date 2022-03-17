@@ -1,5 +1,5 @@
-<%= week_calendar(events: @events) do |date, events| %>
-  <% event_grouped_by_time = events.group_by { |event| event.time.strftime('%k:%M') } %>
+<%= week_calendar(events: @events) do |date, _| %>
+  <% event_grouped_by_time = @events.filter { |event| event.date == date }.group_by { |event| event.time.strftime('%k:%M') } %>
   <% event_grouped_by_time.each do |time, events_per_time| %>
     <div class="card-calendar-group">
       <p class="mb-1"><%= time %></p>

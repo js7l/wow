@@ -46,12 +46,14 @@
       </div>
       </div>
           <div class="item-button">
-          <button type="button" class="btn btn-primary <%= "disabled" if @event.limit_attendees <= @event.bookings.where.not(status: "Cancelled").count || (current_user && current_user.bookings.pluck(:event_id).include?(@event.id)) %>" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <% if current_user && current_user.bookings.where.not(status: "Cancelled").pluck(:event_id).include?(@event.id) %>
+            <button type="button" class="btn btn-primary disabled border-success bg-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Booked
             <% elsif @event.limit_attendees <= @event.bookings.where.not(status: "Cancelled").count %>
+            <button type="button" class="btn btn-primary disabled border-info bg-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Class Full
             <% else %>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Book Now
             <% end %>
           </button>
@@ -100,7 +102,7 @@
           <p>Email : <%= @event.studio.email %> </p>
           <p> Phone : <%= @event.studio.phone_number %> </p>
           </div>
-          <div class="d-flex align-items-center m-2">
+          <div class="icon-studio d-flex align-items-center m-2">
             <%= link_to studio_path(@event.studio) do%>
             <i class="fas fa-info-circle fa-2x"></i>
             <% end %>

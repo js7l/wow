@@ -56,6 +56,19 @@
   background-color: $dark;
 }
 
+<<<<<<< HEAD
 .fa-comment {
   color: white;
+=======
+.notification {
+  top: -5px;
+  width: 27px;
+  border-radius: 50px;
+  color: white;
+  background-color: red;
+  text-align: center;
+  position: absolute;
+  top: 5px;
+  right: -22px;
+>>>>>>> ca746f69bd7a1a116da2caa97f7fee14a26624ad
 }

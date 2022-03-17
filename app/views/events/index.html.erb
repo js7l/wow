@@ -4,7 +4,7 @@
       <div class="form-group d-flex align-items-center me-4 justify-content-between">
         <%# <label for="field-1" class="col-sm-3 control-label">Category</label> %>
         <div class="d-flex align-items-center">
-        <%= f.input :category, :required => false,
+        <%= f.input :category, :required => false, selected: params[:category],
                       collection: Event::CATEGORIES, label: false, prompt: "Select Category",
                       input_html: { \
                         "data-filter-events-target": "inputCategory", \
@@ -16,7 +16,7 @@
       <div class="form-group d-flex align-items-center me-4 justify-content-between">
         <%# <label for="field-1" class="col-sm-3 control-label">Level</label> %>
         <div class="d-flex align-items-center">
-        <%= f.input :level, :required => false,
+        <%= f.input :level, :required => false, selected: params[:level],
                       collection: Event::LEVELS, label: false, prompt: "Select Level",
                       input_html: { \
                         "data-filter-events-target": "inputLevel", \
@@ -51,9 +51,9 @@
     <% end %>
     <div>
       <div class="tab-slider--nav">
-        <ul class="tab-slider--tabs" data-filter-events-target="tabs">
-          <li class="tab-slider--trigger active" rel="tab1" data-filter-events-target="listButton" data-action="click->filter-events#swichTab"><i class="fa fa-list"></i></li>
-          <li class="tab-slider--trigger" rel="tab2" data-filter-events-target="calendarButton" data-action="click->filter-events#swichTab"><i class="fa fa-calendar-alt"></i></li>
+        <ul class="tab-slider--tabs <%= 'slide' if params[:calendar] == "true" %>" data-filter-events-target="tabs">
+          <li class="tab-slider--trigger <%= 'active' if params[:list] == "true" || params[:calendar] != "true" %>" rel="tab1" data-filter-events-target="listButton" data-action="click->filter-events#swichTab"><i class="fa fa-list"></i></li>
+          <li class="tab-slider--trigger <%= 'active' if params[:calendar] == "true" %>" rel="tab2" data-filter-events-target="calendarButton" data-action="click->filter-events#swichTab"><i class="fa fa-calendar-alt"></i></li>
         </ul>
       </div>
     </div>

@@ -157,12 +157,11 @@
 .card-review {
   padding: 18px;
   overflow: hidden;
-  background: white;
+  background: rgb(189, 185, 185);
   border-radius: 10px;
   position: relative;
   height: 88px;
   // box-shadow: 0 0 1px rgba(0,0,0,0.2);
-
 
   h2 {
     font-size: 18px;
@@ -453,28 +452,17 @@
 }
 .card-dashboard-map {
   margin-left: 20px;
-
-  #map {
-    width: 75vw;
-    display: flex;
-    object-fit: cover;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-  }
-  .mapboxgl-popup {
-    max-width: 200px;
+  #map{
+    border-radius: 10px;
   }
 
-  .mapboxgl-popup-content {
-    text-align: center;
-    font-family: "Open Sans", sans-serif;
+  .card-map{
+    border-radius: 10px;
   }
+}
 
-  .mapboxgl-ctrl-geocoder {
-    max-width: none;
-    width: 100%;
-    border: 1px solid lightgrey;
-    box-shadow: none;
+.card-payment {
+  img {
+    border-radius: 10px;
   }
 }

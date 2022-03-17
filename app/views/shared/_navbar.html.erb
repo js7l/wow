@@ -28,22 +28,28 @@
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Create a Studio", new_studio_path, class: "nav-link" %>
+            <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown ms-2">
             <%= cl_image_tag current_user.avatar.key, height: 40, width: 40, crop: :fill, class: "avatar-small dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-
-            <%= link_to chatrooms_path, data: { controller: "notification", notification_user_id_value: current_user.id  }, class:"position-relative" do %>
-              <i class="far fa-comment icon <%= 'icon-black' if params[:controller] == "chatrooms" %>">
-              </i>
-              <span data-notification-target="counter" class="notification <%= 'empty' if current_user.unread_messages.zero? %>"><%= current_user.unread_messages %></span>
-            <% end %>
+            <div class="notification border-0">
+              <%=
+                if (current_user && current_user.chatrooms)
+                  @chatrooms = (current_user.chatrooms + Chatroom.where(studio: current_user.studios)).uniq
+                  if (@chatrooms.count > 0)
+                    unread = @chatrooms.map { |cr| cr.messages.select { |m| m.read == false && m.user != current_user }.count }.sum
+                    unread if unread > 0
+                  end
+                end
+              %>
+            </div>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
               <% if !current_user.studios.empty? %>
                 <%= link_to "Messages", chatrooms_path, class: "dropdown-item" %>
                 <%= link_to "Create new class", new_event_path, class: "dropdown-item" %>
+              <% else %>
+                <%= link_to "Create a Studio", new_studio_path, class: "dropdown-item" %>
               <% end %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>

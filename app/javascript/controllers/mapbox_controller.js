@@ -11,6 +11,7 @@ export default class extends Controller {
 
   connect() {
     mapboxgl.accessToken = this.apiKeyValue;
+    this.markers = []
 
     this.map = new mapboxgl.Map({
       container: this.element,
@@ -25,6 +26,7 @@ export default class extends Controller {
     setTimeout(() => {
       if (location.pathname === "/dashboard") {
         this.#getUserCoords()
+        this.#handleClick()
       }
       this.map.resize()
     }, 2000);
@@ -44,10 +46,12 @@ export default class extends Controller {
       customMarker.style.height = "25px"
 
       // Pass the element as an argument to the new marker
-      new mapboxgl.Marker(customMarker)
+      const mapMarker = new mapboxgl.Marker(customMarker)
         .setLngLat([marker.lng, marker.lat])
         .setPopup(popup)
         .addTo(this.map)
+
+      this.markers.push(mapMarker)
     });
   }
 
@@ -61,11 +65,10 @@ export default class extends Controller {
   }
 
   #getDirection(start) {
-    this.getRoute(start);
-    console.log(this.avatarValue)
     this.map.loadImage(this.avatarValue, (err, img) => {
       this.map.addImage("human", img)
     })
+    this.getRoute(start);
     // Add starting point to the map
     this.map.addLayer({
       id: 'point',
@@ -141,8 +144,68 @@ export default class extends Controller {
     navigator.geolocation.getCurrentPosition((pos) => {
       const start = ([pos.coords.longitude, pos.coords.latitude])
       this.#getDirection(start)
-      console.log("HI")
     })
+  }
+
+  #handleClick() {
+    this.map.on('click', event => {
+      const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
+      const end = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'Point',
+              coordinates: coords
+            }
+          }
+        ]
+      };
+
+      if (this.map.getLayer('end')) {
+        this.map.getSource('end').setData(end);
+      } else {
+        this.map.addLayer({
+          id: 'end',
+          type: 'circle',
+          source: {
+            type: 'geojson',
+            data: {
+              type: 'FeatureCollection',
+              features: [
+                {
+                  type: 'Feature',
+                  properties: {},
+                  geometry: {
+                    type: 'Point',
+                    coordinates: coords
+                  }
+                }
+              ]
+            }
+          },
+          paint: {
+            'circle-radius': 10,
+            'circle-color': '#f30'
+          }
+        });
+      }
+      this.getRoute(coords);
+    })
+  }
+  #getInstructions(data) {
+    const instructions = document.getElementById('instructions');
+    const steps = data.legs[0].steps;
+
+    let tripInstructions = '';
+    for (const step of steps) {
+      tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+    }
+    instructions.innerHTML = `<p><strong>Trip Duration: ${Math.floor(
+      data.duration / 60
+    )} mins 🚗 </strong></p><ol>${tripInstructions}</ol>`;
   }
 
   // create a function to make a directions request
@@ -152,7 +215,7 @@ export default class extends Controller {
     // only the end or destination will change
     const start = [115.130468, -8.654085];
     const query = await fetch(
-      `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+      `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
       { method: 'GET' }
     );
     const json = await query.json();
@@ -191,5 +254,6 @@ export default class extends Controller {
       });
     }
     // add turn instructions here at the end
+    this.#getInstructions(data)
   }
 }
