@@ -27,10 +27,6 @@ export default class extends Controller {
       if (location.pathname === "/dashboard") {
         this.#getUserCoords()
         this.#handleClick()
-<<<<<<< HEAD
-        // this.#getInstructions()
-=======
->>>>>>> f87d615da94b3669049cc1b5dce0a80350b546ca
       }
       this.map.resize()
     }, 2000);
