@@ -1,5 +1,6 @@
 <div class="container" id="studio-show" data-controller="popup">
-  <div class="card-wrapper-studio mt-5">
+  <button type="button" id="back" class="btn btn-primary"><%= link_to "Back", events_path %></button>
+  <div class="card-wrapper-studio">
     <% if @studio.events.first.nil? %>
       <div class="card-studio-image" style="background-image: url('<%= image_path "gray-checkers.jpg", height: 400, crop: :fill %>')">
       </div>
@@ -8,7 +9,7 @@
       </div>
     <% end %>
     <div class="card-show">
-      <h2><%= @studio.name %></h2>
+        <h2><%= @studio.name %></h2>
       <div>
         <span class="fa fa-star icon-star"></span>
         <span class="fa fa-star icon-star"></span>
@@ -19,18 +20,20 @@
       <p><%= @studio.description %></p>
       <p>Email: <%= @studio.email %></p>
       <p>Phone number: <%= @studio.phone_number %></p>
-      <% if @chatroom %>
-        <button type="button" class="btn" data-action="click->popup#show">
-          <i class="far fa-comments fa-2x"></i>
-        </button>
-      <% else %>
-        <%= link_to studio_chatrooms_path(@studio), method: :post, class:"btn" do%>
-          <i class="far fa-comments fa-2x"></i>
-          <% end %>
-      <% end %>
+      <div id="chat-btn">
+        <% if @chatroom %>
+          <button type="button" class="btn" data-action="click->popup#show">
+            <i class="far fa-comments fa-2x"></i>
+          </button>
+        <% else %>
+          <%= link_to studio_chatrooms_path(@studio), method: :post, class:"btn" do%>
+            <i class="far fa-comments fa-2x"></i>
+            <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div class="card-wrapper-studio">
+  <div class="card-wrapper-studio mt-5">
     <div class="card-schedule">
       <div class="border-0 mb-4">
         <h4>Schedule</h4>

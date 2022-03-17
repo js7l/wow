@@ -32,7 +32,8 @@
           </li>
           <li class="nav-item dropdown ms-2">
             <%= cl_image_tag current_user.avatar.key, height: 40, width: 40, crop: :fill, class: "avatar-small dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <div class="notification">
+
+            <div class="notification border-0">
               <%=
                 if (current_user && current_user.chatrooms)
                   @chatrooms = (current_user.chatrooms + Chatroom.where(studio: current_user.studios)).uniq

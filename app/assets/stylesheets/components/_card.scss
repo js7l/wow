@@ -117,6 +117,7 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transform: scale(1.05);
 
   h2 {
     font-size: 20px;
@@ -147,7 +148,7 @@
   }
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.10);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
 }
