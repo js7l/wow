@@ -57,7 +57,7 @@ class EventsController < ApplicationController
     @events = Event.where(studio: @studio)
     reviews = @studio.events.map {|event| event.reviews }
     @reviews = reviews.flatten
-    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
+    @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }.sort_by { |group| group[0] }
     @markers = [{
       lat: @studio.latitude,
       lng: @studio.longitude,
