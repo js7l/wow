@@ -21,6 +21,7 @@ class PagesController < ApplicationController
       {
         lat: studio.latitude,
         lng: studio.longitude,
+        info_window: render_to_string(partial: "pages/dashboard_info_window", locals: { studio: studio }, formats: [:html]),
         image_url: helpers.asset_url("wow-logo.png")
       }
     end
