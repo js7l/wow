@@ -6,14 +6,11 @@ class ChatroomsController < ApplicationController
   end
 
   def show
-    @chatroom = Chatroom.find(params[:id])
+    @chatroom = Chatroom.includes(:messages).find(params[:id])
     @message = Message.new
-    @unread = @chatroom.messages.select { |m| m.user != current_user && m.read == false }
-    @unread.each do |msg|
-      msg.read = true
-      msg.save!
-    end
-
+    other_person = @chatroom.other_person(current_user)
+    @messages = @chatroom.messages.where(user: other_person)
+    @messages.update_all(read: true)
   end
 
   def create

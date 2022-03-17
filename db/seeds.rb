@@ -59,13 +59,13 @@ canggu.avatar.attach(io: file, filename: "canggu.jpg")
 canggu.save!
 
 samadi = Studio.new({ name: 'Samadi', address: 'Echo Beach Canggu, Bali', email: 'contact@samadibali.com', phone_number: '+62 (0)81238312505', user: ratna,
-  description: 'To be at your service with Love and Care Samadi brings in the best of national and international Teachers, Therapists, Facilitators, Chefs, Artists and Experts who have trained themselves extensively in a variety of different Programs, Practices and Skills. All so our Team at Samadi bring a wealth of wisdom and experience with the eagerness to share their love and passion with you.' })
+  description: 'To be at your service with Love and Care Samadi brings in the best of national and international Teachers, Therapists, Facilitators, and Experts who have trained themselves extensively in a variety of different Programs. All so our Team at Samadi bring a wealth of wisdom and experience with the eagerness to share their passion with you.' })
 file = File.open(Rails.root.join("app/assets/images/samadi.png"))
 samadi.avatar.attach(io: file, filename: "samadi.jpg")
 samadi.save!
 
 bodyfactory = Studio.new({ name: 'Body Factory Bali', address: 'Berawa, Bali', email: 'info@bodyfactorybali.com', phone_number: '+ 62 811 3802 255', user: jess,
-  description: 'A comprehensive approach to gym Bali. Body Factory Bali is an intelligent fitness, health, and wellness facility expertly delivered in our luxurious tropical location in Canggu. Experience working out in one of the best, all-inclusive approach to fitness and a healthy lifestyle. Located inside the building that housed an old silver factory, Body Factory Bali is so much more than a gym.' })
+  description: 'A comprehensive approach to gym Bali. Body Factory Bali is an intelligent fitness, health, and wellness facility expertly delivered in our luxurious tropical location in Canggu. Experience working out in one of the best, all-inclusive approach to fitness and a healthy lifestyle.' })
 file = File.open(Rails.root.join("app/assets/images/bodyfactory.png"))
 bodyfactory.avatar.attach(io: file, filename: "bodyfactory.jpg")
 bodyfactory.save!
