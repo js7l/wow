@@ -63,7 +63,7 @@
 }
 
 .card-class-show {
-  height: 400px;
+  height: 460px;
   overflow-y: scroll;
 }
 
@@ -87,6 +87,10 @@
   height: 300px;
   display: flex;
   flex-direction: column;
+  img {
+    height: 100px;
+    width: 120px;
+  }
 }
 .item-value {
   margin-left: 40px;
@@ -98,3 +102,15 @@
 .icon-empty {
   color: #aaa9a6;
 }
+
+// #instructions {
+//   position: absolute;
+//   margin: 20px;
+//   width: 25%;
+//   top: 0;
+//   bottom: 20%;
+//   padding: 20px;
+//   background-color: #fff;
+//   overflow-y: scroll;
+//   font-family: sans-serif;
+// }
