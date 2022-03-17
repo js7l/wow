@@ -19,7 +19,7 @@ class EventsController < ApplicationController
     end
 
     if params[:time].present?
-      @events = @events.where(time: params[:time])
+      @events = @events.where(time: params[:time].to_time)
     end
 
     if params[:level].present?
