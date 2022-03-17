@@ -26,6 +26,10 @@ class EventsController < ApplicationController
       @events = @events.where(level: params[:level])
     end
 
+    if params[:start_date].present?
+      @events = @events.where('date > ?', params[:start_date])
+    end
+
     @events = @events.where('start_time > ?', DateTime.now)
 
     @events_group = @events.group_by { |event| [event.date, event.time.strftime('%k:%M')] }
@@ -42,8 +46,6 @@ class EventsController < ApplicationController
     end
 
     #simple calender gem
-    start_date = params.fetch(:start_date, Date.today).to_date
-    @meetings = Event.where(start_time: start_date..(start_date + 8.day))
     respond_to do |format|
       format.html # Follow regular flow of Rails
       format.text { render partial: 'class_view', locals: { events: @events, events_group: @events_group }, formats: [:html] }
