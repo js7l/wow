@@ -12,9 +12,7 @@
     <%= f.input :instructor %>
     <%= f.input :limit_attendees %>
     <%= f.input :level, collection: Event::LEVELS %>
-    <%= f.input :start_time %>
-    <%= f.input :end_time %>
-    <%= f.input :price_cents %>
+    <%= f.input :price %>
     <%= f.input :photo %>
     <%= f.submit class:"btn btn-primary" %>
   <% end %>
