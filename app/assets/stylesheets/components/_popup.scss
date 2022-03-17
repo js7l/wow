@@ -18,8 +18,11 @@
 
   .popup-sent {
     border: none;
-    background: none;
-    width: 15px;
+    background-color: transparent;
+    margin-bottom: 15px;
+    &:hover {
+      color: $primary;
+    }
   }
 
   .border {

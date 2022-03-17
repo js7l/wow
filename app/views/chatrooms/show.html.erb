@@ -16,6 +16,6 @@
       placeholder: "Message ##{@chatroom.id}",
       wrapper_html: {class: "flex-grow-1"}
     %>
-    <%= f.submit "Send", class: "btn btn-primary" %>
+    <button class="chat-sent" type="submit"><i class="far fa-paper-plane fa-lg"></i></button>
   <% end %>
 </div>

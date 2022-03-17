@@ -65,4 +65,11 @@
     }
 
   }
+
+  .fa-comments {
+    font-size: 45px;
+    &:hover {
+      color: $primary;
+    }
+  }
 }

@@ -27,4 +27,13 @@
       margin-bottom: 0;
     }
   }
+
+  .chat-sent {
+    border: none;
+    background-color: transparent;
+    margin-bottom: 15px;
+    &:hover {
+      color: $primary;
+    }
+  }
 }
