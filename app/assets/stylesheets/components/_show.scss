@@ -116,3 +116,10 @@
   font-family: "Montserrat";
   border-radius: 10px;
 }
+.icon-studio {
+  bottom: 3px;
+
+  &:hover {
+    color: $primary;
+  }
+}
