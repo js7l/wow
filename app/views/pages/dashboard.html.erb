@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pt-4">
     <h2>Dashboard</h2>
     <div class="d-flex mt-3">
       <%= cl_image_tag current_user.avatar.key, class: "avatar-large" %>
@@ -34,7 +34,9 @@
               </p>
               <div class="card-product-right-buttons">
               <% if booking_of_user.status != "Cancelled" %>
-                <% if (booking_of_user.event.start_time >= Time.now())%>
+                <% if (booking_of_user.status == "Pending")%>
+                  <%= link_to "Pay Now", new_booking_payment_path(booking_of_user) , class:"btn btn-secondary" %>
+                <% elsif (booking_of_user.event.start_time >= Time.now())%>
                   <!-- Button Cancel Trigger Modal -->
                   <div>
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -69,7 +71,7 @@
                   </div>
                   <!-- end of modal -->
                   <%# ---------- %>
-                <% else %>
+                <% elsif booking_of_user.status != "Pending" %>
                   <div class="ms-2">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= booking_of_user.id%>" data-bs-whatever="@getbootstrap">
                       Review

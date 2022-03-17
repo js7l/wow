@@ -11,8 +11,9 @@
     background-color: #1dd88a;
   }
 
-  &:disabled {
+  &.disabled {
     color: white;
+    opacity: 1;
   }
 }
 
